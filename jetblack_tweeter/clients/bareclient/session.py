@@ -9,11 +9,9 @@ from bareclient import HttpUnboundSession
 from bareutils import text_reader, bytes_writer
 import bareutils.response_code as response_code
 
-from ..types import AbstractTweeterSession
+from ...types import AbstractTweeterSession
 
 from .utils import to_lines
-
-DUMMY_FP = io.BytesIO(b'')
 
 
 class TweeterHttpError(HTTPError):

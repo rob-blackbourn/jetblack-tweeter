@@ -1,8 +1,10 @@
+"""An example using bareClient"""
+
 import asyncio
 import os
 
 from jetblack_tweeter import Tweeter
-from jetblack_tweeter.bareclient import BareTweeterSession
+from jetblack_tweeter.clients.bareclient import BareTweeterSession
 
 APP_KEY = os.environ["APP_KEY"]
 APP_KEY_SECRET = os.environ["APP_KEY_SECRET"]
