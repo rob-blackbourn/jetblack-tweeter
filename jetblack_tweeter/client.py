@@ -14,16 +14,16 @@ class Tweeter:
     def __init__(
             self,
             session: AbstractTweeterSession,
-            consumer_key: str,
-            consumer_secret: str,
+            app_key: str,
+            app_key_secret: str,
             *,
             access_token: Optional[str] = None,
             access_token_secret: Optional[str] = None
     ):
         self._client = AuthenticatedHttpClient(
             session,
-            consumer_key=consumer_key,
-            consumer_secret=consumer_secret,
+            consumer_key=app_key,
+            consumer_secret=app_key_secret,
             access_token=access_token,
             access_token_secret=access_token_secret
         )

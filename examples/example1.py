@@ -5,8 +5,8 @@ from os.path import expandvars
 from jetblack_tweeter import Tweeter
 from jetblack_tweeter.bareclient import BareTweeterSession
 
-CONSUMER_KEY = os.environ["CONSUMER_KEY"]
-CONSUMER_SECRET = os.environ["CONSUMER_SECRET"]
+APP_KEY = os.environ["APP_KEY"]
+APP_KEY_SECRET = os.environ["APP_KEY_SECRET"]
 ACCESS_TOKEN = os.environ["ACCESS_TOKEN"]
 ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
 
@@ -15,8 +15,8 @@ async def main():
     tweeter = Tweeter(
         BareTweeterSession(),
         # required for oauth1 signing:
-        CONSUMER_KEY,
-        CONSUMER_SECRET,
+        APP_KEY,
+        APP_KEY_SECRET,
         # optionally necessary for endpoints requiring a user's scope:
         access_token=ACCESS_TOKEN,
         access_token_secret=ACCESS_TOKEN_SECRET
