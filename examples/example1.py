@@ -22,14 +22,14 @@ async def main():
         access_token_secret=ACCESS_TOKEN_SECRET
     )
 
-    user_timeline = await tweeter.user_timeline()
-    print(user_timeline)
+    # user_timeline = await tweeter.user_timeline()
+    # print(user_timeline)
 
-    account_settings = await tweeter.account_settings()
-    print(account_settings)
+    # account_settings = await tweeter.account_settings()
+    # print(account_settings)
 
-    account_verify_credentials = await tweeter.account_verify_credentials()
-    print(account_verify_credentials)
+    # account_verify_credentials = await tweeter.account_verify_credentials()
+    # print(account_verify_credentials)
 
     # watch the random sampling of tweets chosen by twitter
     async for tweet in tweeter.sample():

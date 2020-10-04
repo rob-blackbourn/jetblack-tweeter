@@ -1,13 +1,15 @@
 """A bareClient implementation of TweeterSession"""
 
 import json
-from typing import Any, AsyncIterator, List, Mapping, Optional, Union
+from typing import Any, AsyncIterator, List, Mapping, Optional, Tuple, Union
 
 from bareclient import HttpUnboundSession
 from bareutils import text_reader
 import bareutils.response_code as response_code
 
 from ..types import AbstractTweeterSession
+
+from .utils import to_lines
 
 
 class BareTweeterSession(AbstractTweeterSession):
@@ -35,9 +37,11 @@ class BareTweeterSession(AbstractTweeterSession):
                 raise Exception('Failed')
 
             if response['more_body']:
-                # TODO: This should be a line reader.
+                buf = b''
                 async for item in response['body']:
-                    yield json.loads(item.decode())
+                    lines, buf = to_lines(buf + item)
+                    for line in lines:
+                        yield json.loads(line.decode())
 
     async def get(
             self,
