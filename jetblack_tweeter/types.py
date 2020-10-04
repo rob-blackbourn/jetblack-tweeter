@@ -2,7 +2,12 @@
 
 from abc import ABCMeta, abstractmethod
 from enum import Enum
-from typing import Any, AsyncIterator, List, Mapping, Optional, Union
+from typing import Any, AsyncIterator, List, Mapping, Optional, Tuple, Union
+
+
+Number = Union[float, int]
+Location = Tuple[Number, Number]
+BoundingBox = Tuple[Location, Location]
 
 
 class AbstractTweeterSession(metaclass=ABCMeta):

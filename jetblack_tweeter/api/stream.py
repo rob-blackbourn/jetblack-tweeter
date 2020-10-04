@@ -4,11 +4,12 @@ from typing import Any, AsyncIterable, List, Optional
 
 
 from ..constants import URL_STREAM_1_1
-from ..types import AbstractHttpClient, FilterLevel
+from ..types import AbstractHttpClient, BoundingBox, FilterLevel
 from ..utils import (
     optional_str_list_to_str,
     optional_int_list_to_str,
-    bool_to_str
+    bool_to_str,
+    optional_bounding_box_list_to_str
 )
 
 
@@ -22,7 +23,7 @@ class Stream:
             *,
             follow: Optional[List[int]] = None,
             track: Optional[List[str]] = None,
-            locations: Optional[List[str]] = None,
+            locations: Optional[List[BoundingBox]] = None,
             filter_level: FilterLevel = FilterLevel.NONE,
             delimited: Optional[int] = None,
             stall_warnings: bool = True
@@ -34,7 +35,7 @@ class Stream:
                 Defaults to None.
             track (Optional[List[str]], optional): List of keywords (or phrases)
                 to track. Defaults to None.
-            locations (Optional[List[str]], optional): List of bounding boxes to
+            locations (Optional[List[BoundingBox]], optional): List of bounding boxes to
                 track. Defaults to None.
             filter_level (FilterLevel, optional): Filter status update
                 frequency. Defaults to FilterLevel.NONE.
@@ -49,8 +50,8 @@ class Stream:
         """
         body = {
             'follow': optional_int_list_to_str(follow),
-            'track': optional_str_list_to_str(track, ''),
-            'locations': optional_str_list_to_str(locations, ''),
+            'track': optional_str_list_to_str(track),
+            'locations': optional_bounding_box_list_to_str(locations),
             'filter_level': filter_level.value,
             'delimited': delimited,
             'stall_warnings': bool_to_str(stall_warnings)

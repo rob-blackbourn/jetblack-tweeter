@@ -39,7 +39,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             headers={} if data is None else {
                 'content-type': 'application/x-www-form-urlencoded',
             },
-            body=clean_optional_dict(data),
+            body=urlencode(clean_dict(data)) if data else None,
             http_method=method.upper(),
         )
         async for item in self._client.stream(
