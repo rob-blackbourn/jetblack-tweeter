@@ -28,12 +28,15 @@ async def main():
     # account_settings = await tweeter.account_settings()
     # print(account_settings)
 
-    # account_verify_credentials = await tweeter.account_verify_credentials()
-    # print(account_verify_credentials)
+    account_verify_credentials = await tweeter.account_verify_credentials()
+    print(account_verify_credentials)
 
     # watch the random sampling of tweets chosen by twitter
-    async for tweet in tweeter.sample():
-        print(tweet)
+    # async for tweet in tweeter.sample():
+    #     print(tweet)
+
+    # result = await tweeter.status_update('Test message')
+    # print(result)
 
 if __name__ == '__main__':
     asyncio.run(main())

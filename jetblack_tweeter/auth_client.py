@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 from oauthlib.oauth1 import Client as OAuth1Client
 
 from .types import AbstractHttpClient, AbstractTweeterSession
+from .utils import clean_optional_dict, clean_dict
 
 
 class AuthenticatedHttpClient(AbstractHttpClient):
@@ -38,7 +39,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             headers={} if data is None else {
                 'content-type': 'application/x-www-form-urlencoded',
             },
-            body=data,
+            body=clean_optional_dict(data),
             http_method=method.upper(),
         )
         async for item in self._client.stream(
@@ -54,11 +55,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             url: str,
             params: Optional[Mapping[str, Any]] = None
     ) -> Union[List[Any], Mapping[str, Any]]:
-        data = {
-            k: v
-            for k, v in params.items()
-            if v is not None
-        } if params else None
+        data = clean_optional_dict(params)
         url, headers, _ = self._oauth_client.sign(
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='GET',
@@ -68,14 +65,11 @@ class AuthenticatedHttpClient(AbstractHttpClient):
     async def post(
             self,
             url: str,
-            data: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
-        url, headers, body = self._oauth_client.sign(
-            url,
-            headers={} if data is None else {
-                'content-type': 'application/x-www-form-urlencoded',
-            },
-            body=data,
-            http_method='POST',
+        data = clean_optional_dict(params)
+        url, headers, _ = self._oauth_client.sign(
+            url + (f'?{urlencode(data)}' if data else ''),
+            http_method='POST'
         )
-        return await self._client.post(url, headers, body)
+        return await self._client.post(url, headers, None)

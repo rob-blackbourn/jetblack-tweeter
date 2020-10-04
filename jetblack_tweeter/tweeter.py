@@ -1,9 +1,11 @@
 """The twitter client"""
 
-from typing import Any, AsyncIterable, List, Optional
+from typing import Any, AsyncIterable, List, Mapping, Optional, Union
+from urllib.parse import quote
 
 from .auth_client import AuthenticatedHttpClient
 from .types import AbstractTweeterSession, FilterLevel
+from .utils import optional_int_list_to_str, optional_str_list_to_str
 
 URL_STREAM_1_1 = 'https://stream.twitter.com/1.1'
 URL_API_1_1 = 'https://api.twitter.com/1.1'
@@ -60,9 +62,9 @@ class Tweeter:
         body = {
             'filter_level': filter_level.value,
             'stall_warnings': 'true' if stall_warnings else 'false',
-            'track': ','.join(track) if track is not None else '',
-            'follow': ','.join(follow) if follow is not None else '',
-            'locations': ','.join(locations) if locations is not None else '',
+            'track': optional_str_list_to_str(track, ''),
+            'follow': optional_str_list_to_str(follow, ''),
+            'locations': optional_str_list_to_str(locations, ''),
         }
         url = f'{URL_STREAM_1_1}/statuses/filter.json'
         async for message in self._client.stream(url, body):
@@ -158,3 +160,42 @@ class Tweeter:
         }
         url = f'{URL_API_1_1}/account/verify_credentials.json'
         return await self._client.get(url, body)
+
+    async def status_update(
+            self,
+            status: str,
+            *,
+            in_reply_to_status_id: Optional[int] = None,
+            auto_populate_reply_metadata: Optional[bool] = None,
+            exclude_reply_user_ids: Optional[List[int]] = None,
+            attachment_url: Optional[str] = None,
+            media_ids: Optional[List[int]] = None,
+            possibly_sensitive: Optional[bool] = None,
+            lat: Optional[Union[int, float]] = None,
+            long: Optional[Union[int, float]] = None,
+            place_id: Optional[str] = None,
+            display_coordinates: Optional[bool] = None,
+            trim_user: Optional[bool] = None,
+            enable_dmcommands: Optional[bool] = None,
+            fail_dmcommands: Optional[bool] = None,
+            card_uri: Optional[str] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        body = {
+            'status': status,
+            'in_reply_to_status_id': in_reply_to_status_id,
+            'auto_populate_reply_metadata': auto_populate_reply_metadata,
+            'exclude_reply_user_ids': optional_int_list_to_str(exclude_reply_user_ids),
+            'attachment_url': attachment_url,
+            'media_ids': optional_int_list_to_str(media_ids),
+            'possibly_sensitive': possibly_sensitive,
+            'lat': lat,
+            'long': long,
+            'place_id': place_id,
+            'display_coordinates': display_coordinates,
+            'trim_user': trim_user,
+            'enable_dmcommands': enable_dmcommands,
+            'fail_dmcommands': fail_dmcommands,
+            'card_uri': card_uri
+        }
+        url = f'{URL_API_1_1}/statuses/update.json'
+        return await self._client.post(url, body)
