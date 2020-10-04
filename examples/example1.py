@@ -1,6 +1,5 @@
 import asyncio
 import os
-from os.path import expandvars
 
 from jetblack_tweeter import Tweeter
 from jetblack_tweeter.bareclient import BareTweeterSession
@@ -22,20 +21,20 @@ async def main():
         access_token_secret=ACCESS_TOKEN_SECRET
     )
 
-    # user_timeline = await tweeter.user_timeline()
-    # print(user_timeline)
+    user_timeline = await tweeter.statuses.user_timeline()
+    print(user_timeline)
 
-    # account_settings = await tweeter.account_settings()
-    # print(account_settings)
+    account_settings = await tweeter.account.settings()
+    print(account_settings)
 
-    account_verify_credentials = await tweeter.account_verify_credentials()
+    account_verify_credentials = await tweeter.account.verify_credentials()
     print(account_verify_credentials)
 
     # watch the random sampling of tweets chosen by twitter
-    # async for tweet in tweeter.sample():
-    #     print(tweet)
+    async for tweet in tweeter.stream.sample():
+        print(tweet)
 
-    # result = await tweeter.status_update('Test message')
+    # result = await tweeter.statuses.update('Test message')
     # print(result)
 
 if __name__ == '__main__':

@@ -58,6 +58,14 @@ class AbstractHttpClient(metaclass=ABCMeta):
     ) -> Union[List[Any], Mapping[str, Any]]:
         ...
 
+    @ abstractmethod
+    async def post(
+            self,
+            url: str,
+            params: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        ...
+
 
 class FilterLevel(Enum):
     NONE = 'none'
