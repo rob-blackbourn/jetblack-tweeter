@@ -6,6 +6,10 @@ from typing import Any, AsyncIterator, List, Mapping, Optional, Union
 
 
 class AbstractTweeterSession(metaclass=ABCMeta):
+    """The abstract class for Tweeter sessions.
+
+    Implement this class to provide clients for the http library of your choice.
+    """
 
     @abstractmethod
     async def stream(
@@ -17,12 +21,21 @@ class AbstractTweeterSession(metaclass=ABCMeta):
     ) -> AsyncIterator[Union[List[Any], Mapping[str, Any]]]:
         ...
 
-    @ abstractmethod
+    @abstractmethod
     async def get(
             self,
             url: str,
             headers: Mapping[str, str]
     ) -> Union[List[Any], Mapping[str, Any]]:
+        ...
+
+    @abstractmethod
+    async def post(
+            self,
+            url: str,
+            headers: Mapping[str, str],
+            body: Optional[str]
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         ...
 
 

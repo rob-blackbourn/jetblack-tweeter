@@ -64,3 +64,18 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             http_method='GET',
         )
         return await self._client.get(url, headers)
+
+    async def post(
+            self,
+            url: str,
+            data: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        url, headers, body = self._oauth_client.sign(
+            url,
+            headers={} if data is None else {
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            body=data,
+            http_method='POST',
+        )
+        return await self._client.post(url, headers, body)
