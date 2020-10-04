@@ -35,3 +35,11 @@ def clean_dict(data: Mapping[str, Any]) -> Mapping[str, Any]:
 
 def clean_optional_dict(data: Optional[Mapping[str, Any]]) -> Optional[Mapping[str, Any]]:
     return clean_dict(data) if data is not None else None
+
+
+def bool_to_str(value: bool) -> str:
+    return 'true' if value else 'false'
+
+
+def optional_bool_to_str(value: Optional[bool], default: Optional[str] = None) -> Optional[str]:
+    return bool_to_str(value) if value is not None else default

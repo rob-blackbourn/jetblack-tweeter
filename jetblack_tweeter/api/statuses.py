@@ -4,7 +4,7 @@ from typing import Any, List, Mapping, Optional, Union
 
 from ..constants import URL_API_1_1
 from ..types import AbstractHttpClient
-from ..utils import optional_int_list_to_str
+from ..utils import optional_bool_to_str, optional_int_list_to_str, bool_to_str
 
 
 class Statuses:
@@ -29,9 +29,9 @@ class Statuses:
             'count': count,
             'since_id': since_id,
             'max_id': max_id,
-            'trim_user': 'true' if trim_user else 'false',
-            'exclude_replies': 'true' if exclude_replies else 'false',
-            'include_entities': 'true' if include_entities else 'false',
+            'trim_user': bool_to_str(trim_user),
+            'exclude_replies': bool_to_str(exclude_replies),
+            'include_entities': bool_to_str(include_entities),
         }
         url = f'{self._url}/home_timeline.json'
         return await self._client.get(url, body)
@@ -54,9 +54,9 @@ class Statuses:
             'since_id': since_id,
             'count': count,
             'max_id': max_id,
-            'trim_user': str(trim_user).lower(),
-            'exclude_replies': str(exclude_replies).lower(),
-            'include_rts': str(include_rts).lower(),
+            'trim_user': bool_to_str(trim_user),
+            'exclude_replies': bool_to_str(exclude_replies),
+            'include_rts': bool_to_str(include_rts),
         }
         url = f'{self._url}/user_timeline.json'
         return await self._client.get(url, body)
@@ -74,8 +74,8 @@ class Statuses:
             'count': count,
             'since_id': since_id,
             'max_id': max_id,
-            'trim_user': str(trim_user).lower(),
-            'include_entities': str(include_entities).lower(),
+            'trim_user': bool_to_str(trim_user),
+            'include_entities': bool_to_str(include_entities),
         }
         url = f'{self._url}/mentions_timeline.json'
         return await self._client.get(url, body)
@@ -102,18 +102,18 @@ class Statuses:
         body = {
             'status': status,
             'in_reply_to_status_id': in_reply_to_status_id,
-            'auto_populate_reply_metadata': auto_populate_reply_metadata,
+            'auto_populate_reply_metadata': optional_bool_to_str(auto_populate_reply_metadata),
             'exclude_reply_user_ids': optional_int_list_to_str(exclude_reply_user_ids),
             'attachment_url': attachment_url,
             'media_ids': optional_int_list_to_str(media_ids),
-            'possibly_sensitive': possibly_sensitive,
+            'possibly_sensitive': optional_bool_to_str(possibly_sensitive),
             'lat': lat,
             'long': long,
             'place_id': place_id,
             'display_coordinates': display_coordinates,
-            'trim_user': trim_user,
-            'enable_dmcommands': enable_dmcommands,
-            'fail_dmcommands': fail_dmcommands,
+            'trim_user': optional_bool_to_str(trim_user),
+            'enable_dmcommands': optional_bool_to_str(enable_dmcommands),
+            'fail_dmcommands': optional_bool_to_str(fail_dmcommands),
             'card_uri': card_uri
         }
         url = f'{self._url}/update.json'
