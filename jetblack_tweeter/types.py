@@ -33,7 +33,18 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             headers: Mapping[str, str],
             body: Optional[str]
     ) -> AsyncIterator[Union[List[Any], Mapping[str, Any]]]:
-        ...
+        """Stream data
+
+        Args:
+            url (str): The url
+            method (str): The HTTP method
+            headers (Mapping[str, str]): The HTTP headers
+            body (Optional[str]): The body (if any)
+
+        Returns:
+            AsyncIterator[Union[List[Any], Mapping[str, Any]]]: An async
+                iterator of the unpacked JSON message.
+        """
 
     @abstractmethod
     async def get(
@@ -41,7 +52,15 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             url: str,
             headers: Mapping[str, str]
     ) -> Union[List[Any], Mapping[str, Any]]:
-        ...
+        """Get data from Twitter
+
+        Args:
+            url (str): The url
+            headers (Mapping[str, str]): The HTTP headers.
+
+        Returns:
+            Union[List[Any], Mapping[str, Any]]: The unpacked JSON response.
+        """
 
     @abstractmethod
     async def post(
@@ -50,10 +69,22 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             headers: Mapping[str, str],
             body: Optional[str]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
-        ...
+        """Post data to Twitter
+
+        Args:
+            url (str): The url
+            headers (Mapping[str, str]): The HTTP headers
+            body (Optional[str]): The body (if any)
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response (if any).
+        """
 
 
 class AbstractHttpClient(metaclass=ABCMeta):
+    """The abstract class for HTTP clients.
+    """
 
     @abstractmethod
     def stream(
@@ -62,7 +93,18 @@ class AbstractHttpClient(metaclass=ABCMeta):
             data: Optional[Mapping[str, Any]] = None,
             method: str = 'post'
     ) -> AsyncIterator[Union[List[Any], Mapping[str, Any]]]:
-        ...
+        """Stream data from Twitter
+
+        Args:
+            url (str): The url
+            data (Optional[Mapping[str, Any]], optional): The data. Defaults to
+                None.
+            method (str, optional): The HTTP method. Defaults to 'post'.
+
+        Returns:
+            AsyncIterator[Union[List[Any], Mapping[str, Any]]]: An async
+                iterator of unpacked JSON responses.
+        """
 
     @ abstractmethod
     async def get(
@@ -70,7 +112,16 @@ class AbstractHttpClient(metaclass=ABCMeta):
             url: str,
             params: Optional[Mapping[str, Any]] = None
     ) -> Union[List[Any], Mapping[str, Any]]:
-        ...
+        """Gets data from Twitter.
+
+        Args:
+            url (str): The url.
+            params (Optional[Mapping[str, Any]], optional): The parameters if
+                any. Defaults to None.
+
+        Returns:
+            Union[List[Any], Mapping[str, Any]]: The unpacked JSON response.
+        """
 
     @ abstractmethod
     async def post(
@@ -78,16 +129,29 @@ class AbstractHttpClient(metaclass=ABCMeta):
             url: str,
             params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
-        ...
+        """Post data to Twitter.
+
+        Args:
+            url (str): The url
+            params (Optional[Mapping[str, Any]], optional): The parameters if
+                any. Defaults to None.
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response if any
+        """
 
 
 class FilterLevel(Enum):
+    """The filter level for streaming queries
+    """
     NONE = 'none'
     LOW = 'low'
     MEDIUM = 'medium'
 
 
 class UserObject(TypedDict, total=False):
+    """The UserObject response"""
     id: int
     id_str: str
     name: str
@@ -113,11 +177,13 @@ class UserObject(TypedDict, total=False):
 
 
 class CoordinatesObject(TypedDict, total=False):
+    """The coordinates object response"""
     coordinates: Location
     type: str
 
 
 class TweetObject(TypedDict, total=False):
+    """The tweet object response"""
     created_at: str
     id: str
     id_str: str

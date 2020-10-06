@@ -1,0 +1,43 @@
+site_name: jetblack-tweeter
+site_description: An asyncio twitter client
+site_dir: docs
+
+docs_dir: documentation
+
+repo_name: rob-blackbourn/jetblack-tweeter
+repo_url: https://github.com/rob-blackbourn/jetblack-tweeter
+edit_uri: ""
+
+theme:
+    name: 'material'
+    # logo: images/peach.svg
+    # favicon: images/favicon.ico
+
+nav:
+  - index.md
+  - User Guide:
+    - user-guide/installation.md
+    - user-guide/getting-started.md
+  - API:
+    - jetblack_tweeter: api/jetblack_tweeter.md
+    - jetblack_tweeter.api: api/jetblack_tweeter.api.md
+    - jetblack_tweeter.errors: api/jetblack_tweeter.errors.md
+    - jetblack_tweeter.types: api/jetblack_tweeter.types.md
+  
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - jetblack_markdown.autodoc:
+      class_from_init: true
+      ignore_dunder: true
+      ignore_private: true
+      ignore_all: false
+      ignore_inherited: false
+      follow_module_tree: false
+      prefer_docstring: true
+  - toc:
+      permalink: true
+
+extra_css:
+    - css/custom.css
