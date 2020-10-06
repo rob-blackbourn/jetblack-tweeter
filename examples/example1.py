@@ -32,18 +32,18 @@ async def main():
     # account_verify_credentials = await tweeter.account.verify_credentials()
     # print(account_verify_credentials)
 
-    # # watch the random sampling of tweets chosen by twitter
-    # async for tweet in tweeter.stream.sample():
-    #     print(tweet)
-
-    async for tweet in tweeter.stream.filter(
-            track=['#python'],
-            locations=[
-                ((-122.75, 36.8), (-121.75, 37.8)),
-                ((-74, 40), (-73, 41))
-            ]
-    ):
+    # watch the random sampling of tweets chosen by twitter
+    async for tweet in tweeter.stream.sample():
         print(tweet)
+
+    # async for tweet in tweeter.stream.filter(
+    #         track=['#python'],
+    #         locations=[
+    #             ((-122.75, 36.8), (-121.75, 37.8)),
+    #             ((-74, 40), (-73, 41))
+    #         ]
+    # ):
+    #     print(tweet)
 
     # result = await tweeter.statuses.update('Test message')
     # print(result)

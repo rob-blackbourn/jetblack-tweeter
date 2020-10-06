@@ -1,67 +1,16 @@
 """A bareClient implementation of TweeterSession"""
 
 import json
-import io
 from typing import Any, AsyncIterator, List, Mapping, Optional, Union
-from urllib.error import HTTPError
 
 from bareclient import HttpUnboundSession
 from bareutils import text_reader, bytes_writer
 import bareutils.response_code as response_code
 
+from ...errors import ApiError, StreamError
 from ...types import AbstractTweeterSession
 
 from .utils import to_lines
-
-
-class TweeterHttpError(HTTPError):
-
-    def __init__(
-            self,
-            url: str,
-            status_code: int,
-            headers: Mapping[str, str],
-            message: str
-    ) -> None:
-        super().__init__(
-            url,
-            status_code,
-            message,
-            headers,
-            io.BytesIO(b'')
-        )
-
-
-class StreamError(TweeterHttpError):
-
-    def __init__(
-            self,
-            url: str,
-            status_code: int,
-            headers: Mapping[str, str]
-    ) -> None:
-        super().__init__(
-            url,
-            status_code,
-            headers,
-            'stream request failed'
-        )
-
-
-class ApiError(TweeterHttpError):
-
-    def __init__(
-            self,
-            url: str,
-            status_code: int,
-            headers: Mapping[str, str]
-    ) -> None:
-        super().__init__(
-            url,
-            status_code,
-            headers,
-            'api request failed'
-        )
 
 
 class BareTweeterSession(AbstractTweeterSession):
