@@ -10,6 +10,7 @@ from .utils import clean_optional_dict, clean_dict
 
 
 class AuthenticatedHttpClient(AbstractHttpClient):
+    """An HTTP client that generates the headers for OAuth1 authentication"""
 
     def __init__(
             self,
@@ -20,6 +21,18 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             access_token: Optional[str] = None,
             access_token_secret: Optional[str] = None
     ) -> None:
+        """Initialise the authenticated HTTP client.
+
+        Args:
+            tweeter_session (AbstractTweeterSession): The tweeter session
+                implementation.
+            consumer_key (str): THe OAuth1 consumer key
+            consumer_secret (str): The OAuth1 consumer secret.
+            access_token (Optional[str], optional): The OAuth1 access
+                token. Defaults to None.
+            access_token_secret (Optional[str], optional): The Oauth1 access
+                token secret. Defaults to None.
+        """
         self._client = tweeter_session
         self._oauth_client = OAuth1Client(
             consumer_key,

@@ -1,0 +1,1805 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="An asyncio twitter client">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>jetblack_tweeter.api - jetblack-tweeter</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.adb8469c.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#class-account" tabindex="0" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../.." title="jetblack-tweeter" aria-label="jetblack-tweeter" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              jetblack-tweeter
+            </span>
+            <span class="md-header-nav__topic">
+              
+                jetblack_tweeter.api
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/rob-blackbourn/jetblack-tweeter" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    rob-blackbourn/jetblack-tweeter
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../.." title="jetblack-tweeter" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    jetblack-tweeter
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/rob-blackbourn/jetblack-tweeter" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    rob-blackbourn/jetblack-tweeter
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="A Python 3.8+ asyncio Twitter API." class="md-nav__link">
+      A Python 3.8+ asyncio Twitter API.
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      User Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/installation/" title="installation" class="md-nav__link">
+      installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      API
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        API
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../jetblack_tweeter.tweeter/" title="jetblack_tweeter" class="md-nav__link">
+      jetblack_tweeter
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        jetblack_tweeter.api
+      </label>
+    
+    <a href="./" title="jetblack_tweeter.api" class="md-nav__link md-nav__link--active">
+      jetblack_tweeter.api
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#class-account" class="md-nav__link">
+    class Account
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-accountsettings" class="md-nav__link">
+    async method Account.settings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-accountverify_credentials" class="md-nav__link">
+    async method Account.verify_credentials
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-statuses" class="md-nav__link">
+    class Statuses
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statuseshome_timeline" class="md-nav__link">
+    async method Statuses.home_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_2" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesmentions_timeline" class="md-nav__link">
+    async method Statuses.mentions_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_5" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_3" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesupdate" class="md-nav__link">
+    async method Statuses.update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_6" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_4" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesuser_timeline" class="md-nav__link">
+    async method Statuses.user_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_7" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_5" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_5" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-stream" class="md-nav__link">
+    class Stream
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_8" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-generator-method-streamfilter" class="md-nav__link">
+    async generator method Stream.filter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_9" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yields" class="md-nav__link">
+    Yields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-generator-method-streamsample" class="md-nav__link">
+    async generator method Stream.sample
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_10" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yields_1" class="md-nav__link">
+    Yields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#class-account" class="md-nav__link">
+    class Account
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-accountsettings" class="md-nav__link">
+    async method Account.settings
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_1" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-accountverify_credentials" class="md-nav__link">
+    async method Account.verify_credentials
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_2" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_1" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_1" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_1" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-statuses" class="md-nav__link">
+    class Statuses
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_3" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_2" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statuseshome_timeline" class="md-nav__link">
+    async method Statuses.home_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_4" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_2" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_3" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_2" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesmentions_timeline" class="md-nav__link">
+    async method Statuses.mentions_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_5" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_3" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_4" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_3" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesupdate" class="md-nav__link">
+    async method Statuses.update
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_6" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_4" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_5" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_4" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-method-statusesuser_timeline" class="md-nav__link">
+    async method Statuses.user_timeline
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_7" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#description_5" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_6" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns_5" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#class-stream" class="md-nav__link">
+    class Stream
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_8" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_7" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-generator-method-streamfilter" class="md-nav__link">
+    async generator method Stream.filter
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_9" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_8" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yields" class="md-nav__link">
+    Yields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#async-generator-method-streamsample" class="md-nav__link">
+    async generator method Stream.sample
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#summary_10" class="md-nav__link">
+    Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#yields_1" class="md-nav__link">
+    Yields
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>jetblack_tweeter.api</h1>
+                
+                <p>
+<div class="autodoc-class">
+<h3 class="autodoc-title" id="class-account">
+  <span class="autodoc-title-type">class </span><span class="autodoc-title-name">Account</span>
+<a class="headerlink" href="#class-account" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h4>
+<p>Initialise the account endpoint api</p>
+<div class="autodoc-description">
+
+</div>
+<div class="autodoc-signature"><span class="autodoc-qualifier">jetblack_tweeter.api</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">Account</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">None</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span><p>The authenticated client.</p>
+</div>
+<div class="autodoc-attributes">
+
+</div>
+<div class="autodoc-properties">
+
+</div>
+<div class="autodoc-classmethods"></div>
+<div class="autodoc-methods">
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-accountsettings">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Account</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">settings</span>
+<a class="headerlink" href="#async-method-accountsettings" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_1">Summary<a class="headerlink" href="#summary_1" title="Permanent link">&para;</a></h4>
+<p>Returns settings (including current trend, geo and sleep time</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description">Description<a class="headerlink" href="#description" title="Permanent link">&para;</a></h4>
+<p>information) for the authenticating user.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Account</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">settings</var><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Mapping[str, Any]</span></div>
+<br />
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns">Returns<a class="headerlink" href="#returns" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Mapping[str, Any]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">The account settings.</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-accountverify_credentials">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Account</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">verify_credentials</span>
+<a class="headerlink" href="#async-method-accountverify_credentials" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_2">Summary<a class="headerlink" href="#summary_2" title="Permanent link">&para;</a></h4>
+<p>Returns an HTTP 200 OK response code and a representation of the</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description_1">Description<a class="headerlink" href="#description_1" title="Permanent link">&para;</a></h4>
+<p>requesting user if authentication was successful; returns a 401 status
+code and an error message if not. Use this method to test if supplied
+user credentials are valid.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Account</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">verify_credentials</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">skip_status</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">include_email</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Mapping[str, Any]</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_1">Parameters<a class="headerlink" href="#parameters_1" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>The entities node will
+not be included when set to false. Defaults to None.</p>
+<var class="autodoc-varname">skip_status</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>When set to true statuses
+will not be included in the returned user object. Defaults to
+None.</p>
+<var class="autodoc-varname">include_email</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>When set to true email
+will be returned in the user objects as a string. If the user
+does not have an email address on their account, or if the email
+address is not verified, null will be returned. Defaults to
+None.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns_1">Returns<a class="headerlink" href="#returns_1" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Mapping[str, Any]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">User account details</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</p>
+<p>
+<div class="autodoc-class">
+<h3 class="autodoc-title" id="class-statuses">
+  <span class="autodoc-title-type">class </span><span class="autodoc-title-name">Statuses</span>
+<a class="headerlink" href="#class-statuses" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_3">Summary<a class="headerlink" href="#summary_3" title="Permanent link">&para;</a></h4>
+<p>Initialise the statuses end point.</p>
+<div class="autodoc-description">
+
+</div>
+<div class="autodoc-signature"><span class="autodoc-qualifier">jetblack_tweeter.api</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">Statuses</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">None</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_2">Parameters<a class="headerlink" href="#parameters_2" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span><p>THe authenticated HTTP client</p>
+</div>
+<div class="autodoc-attributes">
+
+</div>
+<div class="autodoc-properties">
+
+</div>
+<div class="autodoc-classmethods"></div>
+<div class="autodoc-methods">
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-statuseshome_timeline">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">home_timeline</span>
+<a class="headerlink" href="#async-method-statuseshome_timeline" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_4">Summary<a class="headerlink" href="#summary_4" title="Permanent link">&para;</a></h4>
+<p>Returns a collection of the most recent Tweets and Retweets posted by</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description_2">Description<a class="headerlink" href="#description_2" title="Permanent link">&para;</a></h4>
+<p>the authenticating user and the users they follow. The home timeline is
+central to how most users interact with the Twitter service.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">home_timeline</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">int</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">exclude_replies</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Mapping[str, Any]</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_3">Parameters<a class="headerlink" href="#parameters_3" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">int</span><span class="autodoc-punctuation"> (optional)</span><p>Specifies the number of records to retrieve.
+Must be less than or equal to 200. Defaults to 20. The value of
+count is best thought of as a limit to the number of tweets to
+return because suspended or deleted content is removed after the
+count has been applied. Defaults to 20.</p>
+<var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID
+greater than (that is, more recent than) the specified ID. There
+are limits to the number of Tweets which can be accessed through
+the API. If the limit of Tweets has occurred since the since_id,
+the since_id will be forced to the oldest ID available. Defaults
+to None.</p>
+<var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID less
+than (that is, older than) or equal to the specified ID.
+Defaults to None.</p>
+<var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>When true each Tweet returned in a
+timeline will include a user object including only the status
+authors numerical ID. Omit this parameter to receive the
+complete user object. Defaults to True.</p>
+<var class="autodoc-varname">exclude_replies</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>This parameter will prevent
+replies from appearing in the returned timeline. Using
+exclude_replies with the count parameter will mean you will
+receive up-to count Tweets — this is because the count parameter
+retrieves that many Tweets before filtering out retweets and
+replies. Defaults to True.</p>
+<var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>The entities node will not be
+included when set to false. Defaults to False.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns_2">Returns<a class="headerlink" href="#returns_2" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Mapping[str, Any]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">The user timeline.</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-statusesmentions_timeline">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">mentions_timeline</span>
+<a class="headerlink" href="#async-method-statusesmentions_timeline" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_5">Summary<a class="headerlink" href="#summary_5" title="Permanent link">&para;</a></h4>
+<p>Returns the 20 most recent mentions (Tweets containing a users's</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description_3">Description<a class="headerlink" href="#description_3" title="Permanent link">&para;</a></h4>
+<p>@screen_name) for the authenticating user.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">mentions_timeline</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">List[Mapping[str, Any]]</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_4">Parameters<a class="headerlink" href="#parameters_4" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Specifies the number of Tweets to
+try and retrieve, up to a maximum of 200. The value of count is
+best thought of as a limit to the number of tweets to return
+because suspended or deleted content is removed after the count
+has been applied. We include retweets in the count, even if
+include_rts is not supplied. It is recommended you always send
+include_rts=1 when using this API method.. Defaults to None.</p>
+<var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID
+greater than (that is, more recent than) the specified ID. There
+are limits to the number of Tweets which can be accessed through
+the API. If the limit of Tweets has occurred since the since_id,
+the since_id will be forced to the oldest ID available. Defaults
+to None.</p>
+<var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID less
+than (that is, older than) or equal to the specified ID.
+Defaults to None.</p>
+<var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>When true each tweet returned in a
+timeline will include a user object including only the status
+authors numerical ID. Omit this parameter to receive the
+complete user object. Defaults to True.</p>
+<var class="autodoc-varname">include_entities</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>The entities node will not be
+included when set to false. Defaults to True.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns_3">Returns<a class="headerlink" href="#returns_3" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">List[Mapping[str, Any]]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">The mentions timeline.</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-statusesupdate">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">update</span>
+<a class="headerlink" href="#async-method-statusesupdate" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_6">Summary<a class="headerlink" href="#summary_6" title="Permanent link">&para;</a></h4>
+<p>Updates the authenticating user's current status, also known as</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description_4">Description<a class="headerlink" href="#description_4" title="Permanent link">&para;</a></h4>
+<p>Tweeting.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">update</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">status</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">str</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">in_reply_to_status_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">auto_populate_reply_metadata</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">exclude_reply_user_ids</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">attachment_url</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">media_ids</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">possibly_sensitive</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">lat</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Union[int, float]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">long</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Union[int, float]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">place_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">display_coordinates</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">enable_dmcommands</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">fail_dmcommands</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">card_uri</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Optional[Mapping[str, Any]]</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_5">Parameters<a class="headerlink" href="#parameters_5" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">status</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">str</span><p>The text of the status update. URL encode as
+necessary. t.co link wrapping will affect character counts.</p>
+<var class="autodoc-varname">in_reply_to_status_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>The ID of an
+existing status that the update is in reply to. Note: This
+parameter will be ignored unless the author of the Tweet this
+parameter references is mentioned within the status text.
+Therefore, you must include @username , where username is the
+author of the referenced Tweet, within the update. Defaults to
+None.</p>
+<var class="autodoc-varname">auto_populate_reply_metadata</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>If set to
+true and used with in_reply_to_status_id, leading @mentions will
+be looked up from the original Tweet, and added to the new Tweet
+from there. This wil append @mentions into the metadata of an
+extended Tweet as a reply chain grows, until the limit on
+@mentions is reached. In cases where the original Tweet has been
+deleted, the reply will fail. Defaults to None.</p>
+<var class="autodoc-varname">exclude_reply_user_ids</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation"> (optional)</span><p>When used
+with auto_populate_reply_metadata, a comma-separated list of
+user ids which will be removed from the server-generated
+@mentions prefix on an extended Tweet. Note that the leading
+@mention cannot be removed as it would break the
+in-reply-to-status-id semantics. Attempting to remove it will be
+silently ignored. Defaults to None.</p>
+<var class="autodoc-varname">attachment_url</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation"> (optional)</span><p>In order for a URL to not
+be counted in the status body of an extended Tweet, provide a
+URL as a Tweet attachment. This URL must be a Tweet permalink,
+or Direct Message deep link. Arbitrary, non-Twitter URLs must
+remain in the status text. URLs passed to the attachment_url
+parameter not matching either a Tweet permalink or Direct
+Message deep link will fail at Tweet creation and cause an
+exception. Defaults to None.</p>
+<var class="autodoc-varname">media_ids</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation"> (optional)</span><p>A comma-delimited list of
+media_ids to associate with the Tweet. You may include up to 4
+photos or 1 animated GIF or 1 video in a Tweet. See Uploading
+Media for further details on uploading media. Defaults to None.</p>
+<var class="autodoc-varname">possibly_sensitive</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>If you upload Tweet
+media that might be considered sensitive content such as nudity,
+or medical procedures, you must set this value to true. See
+Media setting and best practices for more context. Defaults to
+None.</p>
+<var class="autodoc-varname">lat</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Union[int, float]]</span><span class="autodoc-punctuation"> (optional)</span><p>The latitude of the
+location this Tweet refers to. This parameter will be ignored
+unless it is inside the range -90.0 to +90.0 (North is positive)
+inclusive. It will also be ignored if there is no corresponding
+long parameter. Defaults to None.</p>
+<var class="autodoc-varname">long</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Union[int, float]]</span><span class="autodoc-punctuation"> (optional)</span><p>The longitude of the
+location this Tweet refers to. The valid ranges for longitude
+are -180.0 to +180.0 (East is positive) inclusive. This
+parameter will be ignored if outside that range, if it is not a
+number, if geo_enabled is disabled, or if there no corresponding
+lat parameter. Defaults to None.</p>
+<var class="autodoc-varname">place_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation"> (optional)</span><p>A place in the world. Defaults
+to None.</p>
+<var class="autodoc-varname">display_coordinates</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>Whether or not to
+put a pin on the exact coordinates a Tweet has been sent from.
+Defaults to None.</p>
+<var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>When true the response will
+include a user object including only the author's ID. Omit this
+parameter to receive the complete user object. Defaults to None.</p>
+<var class="autodoc-varname">enable_dmcommands</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>When set to true,
+enables shortcode commands for sending Direct Messages as part
+of the status text to send a Direct Message to a user. When set
+to false, disables this behavior and includes any leading
+characters in the status text that is posted. Defaults to None.</p>
+<var class="autodoc-varname">fail_dmcommands</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[bool]</span><span class="autodoc-punctuation"> (optional)</span><p>When set to true, causes
+any status text that starts with shortcode commands to return an
+API error. When set to false, allows shortcode commands to be
+sent in the status text and acted on by the API. Defaults to
+None.</p>
+<var class="autodoc-varname">card_uri</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation"> (optional)</span><p>Associate an ads card with the
+Tweet using the card_uri value from any ads card response.
+Defaults to None.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns_4">Returns<a class="headerlink" href="#returns_4" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Optional[Mapping[str, Any]]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">The tweet.</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-method-statusesuser_timeline">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">user_timeline</span>
+<a class="headerlink" href="#async-method-statusesuser_timeline" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_7">Summary<a class="headerlink" href="#summary_7" title="Permanent link">&para;</a></h4>
+<p>Returns a collection of the most recent Tweets posted by the user</p>
+<div class="autodoc-description">
+<h4 class="autodoc-title" id="description_5">Description<a class="headerlink" href="#description_5" title="Permanent link">&para;</a></h4>
+<p>indicated by the screen_name or user_id parameters.</p>
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Statuses</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">user_timeline</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">user_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">screen_name</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">exclude_replies</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">include_rts</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">List[Mapping[str, Any]]</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_6">Parameters<a class="headerlink" href="#parameters_6" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">user_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation"> (optional)</span><p>The ID of the user for whom to
+return results. Defaults to None.</p>
+<var class="autodoc-varname">screen_name</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[str]</span><span class="autodoc-punctuation"> (optional)</span><p>The screen name of the user
+for whom to return results. Defaults to None.</p>
+<var class="autodoc-varname">since_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID
+greater than (that is, more recent than) the specified ID. There
+are limits to the number of Tweets that can be accessed through
+the API. If the limit of Tweets has occurred since the
+since_id, the since_id will be forced to the oldest ID
+available. Defaults to None.</p>
+<var class="autodoc-varname">count</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Specifies the number of Tweets to
+try and retrieve, up to a maximum of 200 per distinct request.
+The value of count is best thought of as a limit to the number
+of Tweets to return because suspended or deleted content is
+removed after the count has been applied. We include retweets in
+the count, even if include_rts is not supplied. It is
+recommended you always send include_rts=1 when using this API
+method. Defaults to None.</p>
+<var class="autodoc-varname">max_id</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Returns results with an ID less
+than (that is, older than) or equal to the specified ID.
+Defaults to None.</p>
+<var class="autodoc-varname">trim_user</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>When set to true each Tweet returned in
+a timeline will include a user object including only the status
+authors numerical ID. Omit this parameter to receive the
+complete user object. Defaults to True.</p>
+<var class="autodoc-varname">exclude_replies</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>This parameter will prevent
+replies from appearing in the returned timeline. Using
+exclude_replies with the count parameter will mean you will
+receive up-to count tweets — this is because the count parameter
+retrieves that many Tweets before filtering out retweets and
+replies. Defaults to True.</p>
+<var class="autodoc-varname">include_rts</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>When set to false , the timeline will
+strip any native retweets (though they will still count toward
+both the maximal length of the timeline and the slice selected
+by the count parameter). Note: If you're using the trim_user
+parameter in conjunction with include_rts, the retweets will
+still contain a full user object. Defaults to False.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="returns_5">Returns<a class="headerlink" href="#returns_5" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">List[Mapping[str, Any]]</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">The user timeline.</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</p>
+<p>
+<div class="autodoc-class">
+<h3 class="autodoc-title" id="class-stream">
+  <span class="autodoc-title-type">class </span><span class="autodoc-title-name">Stream</span>
+<a class="headerlink" href="#class-stream" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_8">Summary<a class="headerlink" href="#summary_8" title="Permanent link">&para;</a></h4>
+<p>Initialise the stream end endpoint</p>
+<div class="autodoc-description">
+
+</div>
+<div class="autodoc-signature"><span class="autodoc-qualifier">jetblack_tweeter.api</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">Stream</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">None</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_7">Parameters<a class="headerlink" href="#parameters_7" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">client</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">AbstractHttpClient</span><p>An authenticated client.</p>
+</div>
+<div class="autodoc-attributes">
+
+</div>
+<div class="autodoc-properties">
+
+</div>
+<div class="autodoc-classmethods"></div>
+<div class="autodoc-methods">
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-generator-method-streamfilter">
+  <span class="autodoc-title-type">async generator method </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">filter</span>
+<a class="headerlink" href="#async-generator-method-streamfilter" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_9">Summary<a class="headerlink" href="#summary_9" title="Permanent link">&para;</a></h4>
+<p>Follow the statuses filtering api</p>
+<div class="autodoc-description">
+
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">filter</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">follow</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">track</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[str]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">locations</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[BoundingBox]]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">filter_level</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">FilterLevel</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">delimited</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">stall_warnings</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Any</span></div>
+<br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_8">Parameters<a class="headerlink" href="#parameters_8" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">follow</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[int]]</span><span class="autodoc-punctuation"> (optional)</span><p>List of user ids to follow.
+Defaults to None.</p>
+<var class="autodoc-varname">track</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[str]]</span><span class="autodoc-punctuation"> (optional)</span><p>List of keywords (or phrases)
+to track. Defaults to None.</p>
+<var class="autodoc-varname">locations</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[List[BoundingBox]]</span><span class="autodoc-punctuation"> (optional)</span><p>List of bounding boxes to
+track. Defaults to None.</p>
+<var class="autodoc-varname">filter_level</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">FilterLevel</span><span class="autodoc-punctuation"> (optional)</span><p>Filter status update
+frequency. Defaults to FilterLevel.NONE.</p>
+<var class="autodoc-varname">delimited</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[int]</span><span class="autodoc-punctuation"> (optional)</span><p>Specifies whether messages should
+be length-delimited. Defaults None.</p>
+<var class="autodoc-varname">stall_warnings</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">bool</span><span class="autodoc-punctuation"> (optional)</span><p>Whether or not to warn the caller
+about stalls when falling behind the twitter real time queue.
+Defaults to True.</p>
+</div>
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="yields">Yields<a class="headerlink" href="#yields" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Any</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">A status response</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+<div class="autodoc-callable">
+<h3 class="autodoc-title" id="async-generator-method-streamsample">
+  <span class="autodoc-title-type">async generator method </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">sample</span>
+<a class="headerlink" href="#async-generator-method-streamsample" title="Permanent link">&para;</a></h3>
+<h4 class="autodoc-title" id="summary_10">Summary<a class="headerlink" href="#summary_10" title="Permanent link">&para;</a></h4>
+<p>Retrieve a sampling of public statuses</p>
+<div class="autodoc-description">
+
+</div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">sample</var><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Any</span></div>
+<br />
+<div class="autodoc-returns">
+<h4 class="autodoc-title" id="yields_1">Yields<a class="headerlink" href="#yields_1" title="Permanent link">&para;</a></h4>
+<span class="autodoc-vartype">Any</span><span class="autodoc-punctuation">: </span>
+<span class="autodoc-summary">A sample status response</span>
+</div>
+<div class="autodoc-raises">
+
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</div>
+<div class="autodoc-examples">
+
+</div>
+</div>
+</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../jetblack_tweeter.tweeter/" title="jetblack_tweeter" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                jetblack_tweeter
+              </span>
+            </div>
+          </a>
+        
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.c33a9706.js"></script>
+      
+      <script>app.initialize({version:"1.1.2",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

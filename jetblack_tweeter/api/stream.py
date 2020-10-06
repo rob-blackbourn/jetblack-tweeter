@@ -14,8 +14,14 @@ from ..utils import (
 
 
 class Stream:
+    """Support for the stream end point"""
 
     def __init__(self, client: AbstractHttpClient) -> None:
+        """Initialise the stream end endpoint
+
+        Args:
+            client (AbstractHttpClient): An authenticated client.
+        """
         self._client = client
 
     async def filter(
@@ -46,7 +52,7 @@ class Stream:
                 Defaults to True.
 
         Yields:
-            Any: A response
+            Any: A status response
         """
         body = {
             'follow': optional_int_list_to_str(follow),
@@ -60,8 +66,12 @@ class Stream:
         async for message in self._client.stream(url, body):
             yield message
 
-    async def sample(self) -> AsyncIterable:
-        """Retrieve a sampling of public statuses"""
+    async def sample(self) -> AsyncIterable[Any]:
+        """Retrieve a sampling of public statuses
+
+        Yields:
+            Any: A sample status response
+        """
         url = f'{URL_STREAM_1_1}/statuses/sample.json'
         async for message in self._client.stream(url):
             yield message

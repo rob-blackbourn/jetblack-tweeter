@@ -21,6 +21,9 @@ mypy = "^0.782"
 pylint = "^2.6.0"
 autopep8 = "^1.5.4"
 pytest = "^6.1.1"
+mkdocs = "^1.0.4"
+mkdocs-material = "^4.6.0"
+jetblack-markdown = "^0.6"
 
 
 [tool.poetry.extras]
