@@ -28,7 +28,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             resource_owner_secret=access_token_secret
         )
 
-    async def stream(
+    def stream(
             self,
             url: str,
             data: Optional[Mapping[str, Any]] = None,
@@ -42,13 +42,12 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             body=urlencode(clean_dict(data)) if data else None,
             http_method=method.upper(),
         )
-        async for item in self._client.stream(
-                url,
-                method,
-                headers,
-                body
-        ):
-            yield item
+        return self._client.stream(
+            url,
+            method,
+            headers,
+            body
+        )
 
     async def get(
             self,

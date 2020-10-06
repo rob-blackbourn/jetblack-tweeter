@@ -55,8 +55,8 @@ class AbstractTweeterSession(metaclass=ABCMeta):
 
 class AbstractHttpClient(metaclass=ABCMeta):
 
-    @ abstractmethod
-    async def stream(
+    @abstractmethod
+    def stream(
             self,
             url: str,
             data: Optional[Mapping[str, Any]] = None,
