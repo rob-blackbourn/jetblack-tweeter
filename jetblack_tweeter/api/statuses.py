@@ -4,7 +4,12 @@ from typing import Any, List, Mapping, Optional, Union
 
 from ..constants import URL_API_1_1
 from ..types import AbstractHttpClient
-from ..utils import optional_bool_to_str, optional_int_list_to_str, bool_to_str
+from ..utils import (
+    optional_bool_to_str,
+    int_list_to_str,
+    optional_int_list_to_str,
+    bool_to_str
+)
 
 
 class Statuses:
@@ -314,3 +319,55 @@ class Statuses:
         }
         url = f'{self._url}/update.json'
         return await self._client.post(url, body)
+
+    async def lookup(
+            self,
+            ids: List[int],
+            *,
+            include_entities: Optional[bool] = None,
+            trim_user: Optional[bool] = None,
+            map: Optional[bool] = None,
+            include_ext_alt_text: Optional[bool] = None,
+            include_card_uri: Optional[bool] = None
+    ) -> List[Mapping[str, Any]]:
+        """Returns fully-hydrated Tweet objects for up to 100 Tweets per
+        request, as specified by comma-separated values passed to the ids
+        parameter.
+
+        Args:
+            ids (List[int]): A list of Tweet IDs, up to 100 are allowed in a
+                single request.
+            include_entities (Optional[bool], optional): The entities node that
+                may appear within embedded statuses will not be included when
+                set to false. Defaults to None.
+            trim_user (Optional[bool], optional): When set to true each Tweet
+                returned in a timeline will include a user object including only
+                the status authors numerical ID. Omit this parameter to receive
+                the complete user object. Defaults to None.
+            map (Optional[bool], optional): When using the map parameter, Tweets
+                that do not exist or cannot be viewed by the current user will
+                still have their key represented but with an explicitly null
+                value paired with it. Defaults to None.
+            include_ext_alt_text (Optional[bool], optional): If alt text has
+                been added to any attached media entities, this parameter will
+                return an ext_alt_text value in the top-level key for the media
+                entity. If no value has been set, this will be returned as null.
+                Defaults to None.
+            include_card_uri (Optional[bool], optional): When set to true each
+                Tweet returned will include a card_uri attribute when there is
+                an ads card attached to the Tweet and when that card was
+                attached using the card_uri value. Defaults to None.
+
+        Returns:
+            List[Mapping[str, Any]]: A list of tweets.
+        """
+        body = {
+            'id': int_list_to_str(ids),
+            'include_entities': include_entities,
+            'trim_user': optional_bool_to_str(trim_user),
+            'map': optional_bool_to_str(map),
+            'include_ext_alt_text': optional_bool_to_str(include_ext_alt_text),
+            'include_card_uri': optional_bool_to_str(include_card_uri)
+        }
+        url = f'{self._url}/lookup.json'
+        return await self._client.get(url, body)
