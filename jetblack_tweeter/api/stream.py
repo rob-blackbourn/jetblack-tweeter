@@ -1,10 +1,12 @@
 """Support for streams"""
 
-from typing import Any, AsyncIterable, List, Optional
+import asyncio
+from random import random
+from typing import Any, AsyncIterable, List, Optional, Tuple
 
 
 from ..constants import URL_STREAM_1_1
-from ..types import AbstractHttpClient, BoundingBox, FilterLevel
+from ..types import AbstractHttpClient, BoundingBox, FilterLevel, Number
 from ..utils import (
     optional_str_list_to_str,
     optional_int_list_to_str,
@@ -66,12 +68,25 @@ class Stream:
         async for message in self._client.stream(url, body):
             yield message
 
-    async def sample(self) -> AsyncIterable[Any]:
+    async def sample(
+            self,
+            *,
+            delay: Optional[Tuple[Number, Number]] = None
+    ) -> AsyncIterable[Any]:
         """Retrieve a sampling of public statuses
 
+        Args:
+            delay (Optional[Tuple[Number, Number]], optional): A random delay in
+                seconds (min,max) to apply to responses. Defaults to None.
         Yields:
             Any: A sample status response
         """
         url = f'{URL_STREAM_1_1}/statuses/sample.json'
+        delay_min, delay_max = delay or (0, 0)
+        delay_range = delay_max - delay_min
         async for message in self._client.stream(url):
+            if delay_range > 0:
+                num = random()
+                delay = delay_min + num * delay_range
+                await asyncio.sleep(delay)
             yield message
