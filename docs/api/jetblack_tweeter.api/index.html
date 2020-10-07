@@ -463,8 +463,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#async-method-searchsearch" class="md-nav__link">
-    async method Search.search
+  <a href="#async-method-searchtweets" class="md-nav__link">
+    async method Search.tweets
   </a>
   
     <nav class="md-nav">
@@ -800,6 +800,13 @@
           <li class="md-nav__item">
   <a href="#summary_13" class="md-nav__link">
     Summary
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    Parameters
   </a>
   
 </li>
@@ -1004,8 +1011,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#async-method-searchsearch" class="md-nav__link">
-    async method Search.search
+  <a href="#async-method-searchtweets" class="md-nav__link">
+    async method Search.tweets
   </a>
   
     <nav class="md-nav">
@@ -1346,6 +1353,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#parameters_12" class="md-nav__link">
+    Parameters
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#yields_1" class="md-nav__link">
     Yields
   </a>
@@ -1507,15 +1521,15 @@ None.</p>
 <div class="autodoc-classmethods"></div>
 <div class="autodoc-methods">
 <div class="autodoc-callable">
-<h3 class="autodoc-title" id="async-method-searchsearch">
-  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Search</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">search</span>
-<a class="headerlink" href="#async-method-searchsearch" title="Permanent link">&para;</a></h3>
+<h3 class="autodoc-title" id="async-method-searchtweets">
+  <span class="autodoc-title-type">async method </span><span class="autodoc-qualifier">Search</span><span class="autodoc-punctuation">.</span><span class="autodoc-title-name">tweets</span>
+<a class="headerlink" href="#async-method-searchtweets" title="Permanent link">&para;</a></h3>
 <h4 class="autodoc-title" id="summary_4">Summary<a class="headerlink" href="#summary_4" title="Permanent link">&para;</a></h4>
 <p>Returns a collection of relevant Tweets matching a specified query.</p>
 <div class="autodoc-description">
 
 </div>
-<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Search</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">search</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Search</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">tweets</var><span class="autodoc-punctuation">(</span><br />
 <div class="autodoc-argument">
         <var class="autodoc-varname">q</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">str</span><span class="autodoc-punctuation">,</span></div>
 <div class="autodoc-argument">
@@ -2138,8 +2152,18 @@ Defaults to True.</p>
 <div class="autodoc-description">
 
 </div>
-<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">sample</var><span class="autodoc-punctuation">(</span><span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Any</span></div>
+<div class="autodoc-signature"><span class="autodoc-keyword">async</span><span> </span><span class="autodoc-qualifier">Stream</span><span class="autodoc-punctuation">.</span><var class="autodoc-varname">sample</var><span class="autodoc-punctuation">(</span><br />
+<div class="autodoc-argument">
+        <var class="autodoc-varname">*</var><span class="autodoc-punctuation">,</span></div>
+<div class="autodoc-argument">
+        <var class="autodoc-varname">delay</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Tuple[Number, Number]]</span></div>
+<span class="autodoc-punctuation">)</span><span class="autodoc-punctuation"> -&gt; </span><span class="autodoc-vartype">Any</span></div>
 <br />
+<div class="autodoc-parameters">
+<h4 class="autodoc-title" id="parameters_12">Parameters<a class="headerlink" href="#parameters_12" title="Permanent link">&para;</a></h4>
+<var class="autodoc-varname">delay</var><span class="autodoc-punctuation">: </span><span class="autodoc-vartype">Optional[Tuple[Number, Number]]</span><span class="autodoc-punctuation"> (optional)</span><p>A random delay in
+seconds (min,max) to apply to responses. Defaults to None.</p>
+</div>
 <div class="autodoc-returns">
 <h4 class="autodoc-title" id="yields_1">Yields<a class="headerlink" href="#yields_1" title="Permanent link">&para;</a></h4>
 <span class="autodoc-vartype">Any</span><span class="autodoc-punctuation">: </span>
