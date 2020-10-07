@@ -3,7 +3,7 @@
 from typing import Optional
 
 from .auth_client import AuthenticatedHttpClient
-from .api import Account, Stream, Statuses
+from .api import Account, Search, Stream, Statuses
 from .types import AbstractTweeterSession
 
 
@@ -32,8 +32,9 @@ class Tweeter:
                 token secret. Defaults to None.
 
         Attributes:
-            statuses (Statuses): Access to the statuses end point.
             account (Account): Access to the account end point.
+            search (Search): Access to the search end point.
+            statuses (Statuses): Access to the statuses end point.
             stream (Stream): Access to the stream end point.
         """
         client = AuthenticatedHttpClient(
@@ -43,6 +44,7 @@ class Tweeter:
             access_token=access_token,
             access_token_secret=access_token_secret
         )
-        self.statuses = Statuses(client)
         self.account = Account(client)
+        self.search = Search(client)
+        self.statuses = Statuses(client)
         self.stream = Stream(client)

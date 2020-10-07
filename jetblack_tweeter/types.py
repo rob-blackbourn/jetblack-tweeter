@@ -150,6 +150,13 @@ class FilterLevel(Enum):
     MEDIUM = 'medium'
 
 
+class SearchResultType(Enum):
+    """Specifies what type of search results you would prefer to receive."""
+    MIXED = 'mixed'
+    RECENT = 'recent'
+    POPULAR = 'popular'
+
+
 class UserObject(TypedDict, total=False):
     """The UserObject response"""
     id: int
