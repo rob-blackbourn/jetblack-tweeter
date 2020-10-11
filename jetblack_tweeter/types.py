@@ -157,6 +157,25 @@ class SearchResultType(Enum):
     POPULAR = 'popular'
 
 
+class Alignment(Enum):
+    """Tweet alignment"""
+    NONE = 'none'
+    LEFT = 'left'
+    RIGHT = 'right'
+    CENTER = 'center'
+
+
+class Theme(Enum):
+    """Tweet display theme"""
+    LIGHT = 'light'
+    DARK = 'dark'
+
+
+class WidgetType(Enum):
+    """The widget type"""
+    VIDEO = 'video'
+
+
 class UserObject(TypedDict, total=False):
     """The UserObject response"""
     id: int

@@ -3,12 +3,13 @@
 from typing import Any, List, Mapping, Optional, Union
 
 from ..constants import URL_API_1_1
-from ..types import AbstractHttpClient
+from ..types import AbstractHttpClient, Alignment, Theme, WidgetType
 from ..utils import (
     optional_bool_to_str,
     int_list_to_str,
     optional_int_list_to_str,
-    bool_to_str
+    bool_to_str,
+    optional_str_list_to_str
 )
 
 
@@ -320,6 +321,34 @@ class Statuses:
         url = f'{self._url}/update.json'
         return await self._client.post(url, body)
 
+    async def destroy(
+            self,
+            status_id: int,
+            *,
+            trim_user: Optional[bool] = None
+    ) -> Mapping[str, Any]:
+        """Destroys the status specified by the required ID parameter. The
+        authenticating user must be the author of the specified status. Returns
+        the destroyed status if successful.
+
+
+
+        Args:
+            status_id (int): The numerical ID of the desired status.
+            trim_user (Optional[bool], optional): When set true each tweet
+                returned in a timeline will include a user object including only
+                the status authors numerical ID. Omit this parameter to receive
+                the complete user object. Defaults to None.
+
+        Returns:
+            Mapping[str, Any]: THe deleted tweet.
+        """
+        body = {
+            'trim_user': optional_bool_to_str(trim_user)
+        }
+        url = f'{self._url}/destroy/{status_id}.json'
+        return await self._client.post(url, body)
+
     async def lookup(
             self,
             ids: List[int],
@@ -370,4 +399,141 @@ class Statuses:
             'include_card_uri': optional_bool_to_str(include_card_uri)
         }
         url = f'{self._url}/lookup.json'
+        return await self._client.get(url, body)
+
+    async def show(
+            self,
+            status_id: int,
+            *,
+            trim_user: Optional[bool] = None,
+            include_my_retweet: Optional[bool] = None,
+            include_entities: Optional[bool] = None,
+            include_ext_alt_text: Optional[bool] = None,
+            include_card_uri: Optional[bool] = None
+    ) -> Mapping[str, Any]:
+        """Returns a single Tweet, specified by the id parameter. The Tweet's
+        author will also be embedded within the Tweet.
+
+        Args:
+            status_id (int): The numerical ID of the desired Tweet.
+            trim_user (Optional[bool], optional): When set true each Tweet
+                returned in a timeline will include a user object including only
+                the status authors numerical ID. Omit this parameter to receive
+                the complete user object. Defaults to None.
+            include_my_retweet (Optional[bool], optional): When set true any
+                Tweets returned that have been retweeted by the authenticating
+                user will include an additional current_user_retweet node,
+                containing the ID of the source status for the retweet. Defaults
+                to None.
+            include_entities (Optional[bool], optional): The entities node will
+                not be included when set to false. Defaults to None.
+            include_ext_alt_text (Optional[bool], optional): If alt text has
+                been added to any attached media entities, this parameter will
+                return an ext_alt_text value in the top-level key for the media
+                entity. If no value has been set, this will be returned as null.
+                Defaults to None.
+            include_card_uri (Optional[bool], optional): When set to true the
+                retrieved Tweet will include a card_uri attribute when there is
+                an ads card attached to the Tweet and when that card was
+                attached using the card_uri value. Defaults to None.
+
+        Returns:
+            Mapping[str, Any]: The tweet.
+        """
+        body = {
+            'id': status_id,
+            'trim_user': optional_bool_to_str(trim_user),
+            'include_my_retweet': optional_bool_to_str(include_my_retweet),
+            'include_entities': optional_bool_to_str(include_entities),
+            'include_ext_alt_text': optional_bool_to_str(include_ext_alt_text),
+            'include_card_uri': optional_bool_to_str(include_card_uri)
+        }
+        url = f'{self._url}/show.json'
+        return await self._client.get(url, body)
+
+    async def oembed(
+            self,
+            url: str,
+            *,
+            maxwidth: Optional[int] = None,
+            hide_media: Optional[bool] = None,
+            hide_thread: Optional[bool] = None,
+            omit_script: Optional[bool] = None,
+            align: Optional[Alignment] = None,
+            related: Optional[List[str]] = None,
+            lang: Optional[str] = None,
+            theme: Optional[Theme] = None,
+            link_color: Optional[str] = None,
+            widget_type: Optional[WidgetType] = None,
+            dnt: Optional[bool] = None
+    ) -> Mapping[str, Any]:
+        """Returns a single Tweet, specified by either a Tweet web URL or the
+        Tweet ID, in an oEmbed-compatible format.
+
+        Args:
+            url (str): The URL of the Tweet to be embedded
+            maxwidth (Optional[int], optional): The maximum width of a rendered
+                Tweet in whole pixels. A supplied value under or over the
+                allowed range will be returned as the minimum or maximum
+                supported width respectively; the reset width value will be
+                reflected in the returned width property. Note that Twitter does
+                not support the oEmbed maxheight parameter. Tweets are
+                fundamentally text, and are therefore of unpredictable height
+                that cannot be scaled like an image or video. Relatedly, the
+                oEmbed response will not provide a value for height.
+                Implementations that need consistent heights for Tweets should
+                refer to the hide_thread and hide_media parameters below.
+                Defaults to None.
+            hide_media (Optional[bool], optional): When set to true links in a
+                Tweet are not expanded to photo, video, or link previews.
+                Defaults to None.
+            hide_thread (Optional[bool], optional): When set to true a collapsed
+                version of the previous Tweet in a conversation thread will not
+                be displayed when the requested Tweet is in reply to another
+                Tweet. Defaults to None.
+            omit_script (Optional[bool], optional): When set to true the
+                &lt;script&gt; responsible for loading widgets.js will not be
+                returned. Your webpages should include their own reference to
+                widgets.js for use across all Twitter widgets including Embedded
+                Tweets. Defaults to None.
+            align (Optional[Alignment], optional): Specifies whether the
+                embedded Tweet should be floated left, right, or center in the
+                page relative to the parent element. Defaults to None.
+            related (Optional[List[str]], optional): A comma-separated list of
+                Twitter usernames related to your content. This value will be
+                forwarded to Tweet action intents if a viewer chooses to reply,
+                like, or retweet the embedded Tweet. Defaults to None.
+            lang (Optional[str], optional): Request returned HTML and a rendered
+                Tweet in the specified Twitter language supported by embedded
+                Tweets. Defaults to None.
+            theme (Optional[Theme], optional): When set to dark, the Tweet is
+                displayed with light text over a dark background. Defaults to
+                None.
+            link_color (Optional[str], optional): Adjust the color of Tweet text
+                links with a hexadecimal color value. Defaults to None.
+            widget_type (Optional[WidgetType], optional): Set to video to return
+                a Twitter Video embed for the given Tweet. Defaults to None.
+            dnt (Optional[bool], optional): When set to true, the Tweet and its
+                embedded page on your site are not used for purposes that
+                include personalized suggestions and personalized ads. Defaults
+                to None.
+
+        Returns:
+            Mapping[str, Any]: A single tweet.
+        """
+        body = {
+            'url': url,
+            'maxwidth': maxwidth,
+            'hide_media': optional_bool_to_str(hide_media),
+            'hide_thread': optional_bool_to_str(hide_thread),
+            'omit_script': optional_bool_to_str(omit_script),
+            'align': align.value if align is not None else None,
+            'related': optional_str_list_to_str(related),
+            'lang': lang,
+            'theme': theme.value if theme is not None else None,
+            'link_color': link_color,
+            'widget_type': widget_type.value if widget_type is not None else None,
+            'dnt': optional_bool_to_str(dnt)
+        }
+        url = f'{self._url}/oembed.json'
         return await self._client.get(url, body)
