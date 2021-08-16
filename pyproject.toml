@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "jetblack-tweeter"
-version = "0.3.0"
+version = "0.4.0"
 description = "An asyncio twitter client"
 authors = ["Rob Blackbourn <rob.blackbourn@gmail.com>"]
 license = "Apache-2.0"
@@ -12,13 +12,13 @@ repository = "https://github.com/rob-blackbourn/jetblack-tweeter"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-oauthlib = "^3.1.0"
-bareclient = { version = "^4.2", optional = true }
-aiohttp = { version = "^3.6.2", optional = true }
+oauthlib = "^3.1"
+bareclient = { version = "^4.6", optional = true }
+aiohttp = { version = "^3.7", optional = true }
 
 [tool.poetry.dev-dependencies]
-mypy = "^0.782"
-pylint = "^2.6.0"
+mypy = "^0.910"
+pylint = "^2.7"
 autopep8 = "^1.5.4"
 pytest = "^6.1.1"
 mkdocs = "^1.0.4"

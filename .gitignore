@@ -1,5 +1,5 @@
 .mypy_cache/
-.venv/
+.venv*/
 .vscode/
 *.egg-info
 __pycache__

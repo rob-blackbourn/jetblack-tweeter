@@ -10,13 +10,15 @@ import bareutils.response_code as response_code
 from ...errors import ApiError, StreamError
 from ...types import AbstractTweeterSession
 
-from .utils import to_lines
+from .utils import to_lines, make_headers
 
 
 class BareTweeterSession(AbstractTweeterSession):
 
     def __init__(self) -> None:
-        self._client = HttpUnboundSession()
+        self._client = HttpUnboundSession(
+            protocols=('http/1.1')  # http/2 doesn't seem to work.
+        )
 
     async def stream(
             self,
@@ -25,10 +27,7 @@ class BareTweeterSession(AbstractTweeterSession):
             headers: Mapping[str, str],
             body: Optional[str]
     ) -> AsyncIterator[Union[List[Any], Mapping[str, Any]]]:
-        bare_headers = [
-            (name.encode(), value.encode())
-            for name, value in headers.items()
-        ]
+        bare_headers = make_headers(headers)
         buf = body.encode() if body else None
         content = bytes_writer(buf) if buf else None
         if buf:
@@ -63,10 +62,7 @@ class BareTweeterSession(AbstractTweeterSession):
     ) -> Union[List[Any], Mapping[str, Any]]:
         async with self._client.request(
             url,
-            headers=[
-                (name.encode(), value.encode())
-                for name, value in headers.items()
-            ]
+            headers=make_headers(headers)
         ) as response:
             if not response_code.is_successful(response['status_code']):
                 raise ApiError(url, response['status_code'], headers)
@@ -83,10 +79,7 @@ class BareTweeterSession(AbstractTweeterSession):
             headers: Mapping[str, str],
             body: Optional[str]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
-        bare_headers = [
-            (name.encode(), value.encode())
-            for name, value in headers.items()
-        ]
+        bare_headers = make_headers(headers)
         buf = body.encode() if body else None
         content = bytes_writer(buf) if buf else None
         if buf:
