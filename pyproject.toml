@@ -24,6 +24,7 @@ pytest = "^6.1.1"
 mkdocs = "^1.0.4"
 mkdocs-material = "^4.6.0"
 jetblack-markdown = "^0.6"
+types-oauthlib = "^3.1"
 
 
 [tool.poetry.extras]

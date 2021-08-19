@@ -1,7 +1,7 @@
 """Account messages"""
 
 from datetime import date
-from typing import Any, List, Mapping, Optional, Tuple
+from typing import Any, List, Mapping, Optional, Tuple, cast
 
 from ..constants import URL_API_1_1
 from ..types import AbstractHttpClient, Number, SearchResultType
@@ -112,4 +112,7 @@ class Search:
             'include_entities': optional_bool_to_str(include_entities)
         }
         url = f'{self._url}/tweets.json'
-        return await self._client.get(url, body)
+        return cast(
+            List[Mapping[str, Any]],
+            await self._client.get(url, body)
+        )

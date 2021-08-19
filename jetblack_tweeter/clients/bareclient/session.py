@@ -100,7 +100,7 @@ class BareTweeterSession(AbstractTweeterSession):
             if not response['more_body']:
                 return None
 
-            content = await text_reader(response['body'])
-            response_content = json.loads(content)
+            body = await text_reader(response['body'])
+            response_content = json.loads(body)
 
         return response_content

@@ -5,6 +5,7 @@ from enum import Enum
 from typing import (
     Any,
     AsyncIterator,
+    Coroutine,
     List,
     Mapping,
     Optional,
@@ -26,7 +27,7 @@ class AbstractTweeterSession(metaclass=ABCMeta):
     """
 
     @abstractmethod
-    async def stream(
+    def stream(
             self,
             url: str,
             method: str,
@@ -102,7 +103,7 @@ class AbstractHttpClient(metaclass=ABCMeta):
             method (str, optional): The HTTP method. Defaults to 'post'.
 
         Returns:
-            AsyncIterator[Union[List[Any], Mapping[str, Any]]]: An async
+            Coroutine[Any, Any, AsyncIterator[Union[List[Any], Mapping[str, Any]]]]: An async
                 iterator of unpacked JSON responses.
         """
 

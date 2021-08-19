@@ -65,7 +65,7 @@ class Stream:
             'stall_warnings': bool_to_str(stall_warnings)
         }
         url = f'{URL_STREAM_1_1}/statuses/filter.json'
-        async for message in self._client.stream(url, body):
+        async for message in self._client.stream(url, body):  # type: ignore
             yield message
 
     async def sample(
@@ -81,12 +81,14 @@ class Stream:
         Yields:
             Any: A sample status response
         """
+        if delay is None:
+            delay = (0, 0)
         url = f'{URL_STREAM_1_1}/statuses/sample.json'
-        delay_min, delay_max = delay or (0, 0)
+        delay_min, delay_max = delay
         delay_range = delay_max - delay_min
-        async for message in self._client.stream(url):
+        async for message in self._client.stream(url):  # type: ignore
             if delay_range > 0:
                 num = random()
-                delay = delay_min + num * delay_range
-                await asyncio.sleep(delay)
+                delay_seconds = delay_min + num * delay_range
+                await asyncio.sleep(delay_seconds)
             yield message

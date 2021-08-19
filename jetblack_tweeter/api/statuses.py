@@ -1,6 +1,6 @@
 """Support for status type messages"""
 
-from typing import Any, List, Mapping, Optional, Union
+from typing import Any, List, Mapping, Optional, Union, cast
 
 from ..constants import URL_API_1_1
 from ..types import AbstractHttpClient, Alignment, Theme, WidgetType
@@ -200,7 +200,10 @@ class Statuses:
             'include_entities': bool_to_str(include_entities),
         }
         url = f'{self._url}/mentions_timeline.json'
-        return await self._client.get(url, body)
+        return cast(
+            List[Mapping[str, Any]],
+            await self._client.get(url, body)
+        )
 
     async def update(
             self,
@@ -319,7 +322,10 @@ class Statuses:
             'card_uri': card_uri
         }
         url = f'{self._url}/update.json'
-        return await self._client.post(url, body)
+        return cast(
+            Optional[Mapping[str, Any]],
+            await self._client.post(url, body)
+        )
 
     async def destroy(
             self,
@@ -347,7 +353,10 @@ class Statuses:
             'trim_user': optional_bool_to_str(trim_user)
         }
         url = f'{self._url}/destroy/{status_id}.json'
-        return await self._client.post(url, body)
+        return cast(
+            Mapping[str, Any],
+            await self._client.post(url, body)
+        )
 
     async def lookup(
             self,
@@ -399,7 +408,10 @@ class Statuses:
             'include_card_uri': optional_bool_to_str(include_card_uri)
         }
         url = f'{self._url}/lookup.json'
-        return await self._client.get(url, body)
+        return cast(
+            List[Mapping[str, Any]],
+            await self._client.get(url, body)
+        )
 
     async def show(
             self,
@@ -449,7 +461,10 @@ class Statuses:
             'include_card_uri': optional_bool_to_str(include_card_uri)
         }
         url = f'{self._url}/show.json'
-        return await self._client.get(url, body)
+        return cast(
+            Mapping[str, Any],
+            await self._client.get(url, body)
+        )
 
     async def oembed(
             self,
@@ -536,4 +551,7 @@ class Statuses:
             'dnt': optional_bool_to_str(dnt)
         }
         url = f'{self._url}/oembed.json'
-        return await self._client.get(url, body)
+        return cast(
+            Mapping[str, Any],
+            await self._client.get(url, body)
+        )

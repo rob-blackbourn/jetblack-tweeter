@@ -1,6 +1,6 @@
 """Account messages"""
 
-from typing import Any, Mapping, Optional
+from typing import Any, Mapping, Optional, cast
 
 from ..constants import URL_API_1_1
 from ..types import AbstractHttpClient
@@ -27,7 +27,10 @@ class Account:
             Mapping[str, Any]: The account settings.
         """
         url = f'{self._url}/settings.json'
-        return await self._client.get(url)
+        return cast(
+            Mapping[str, Any],
+            await self._client.get(url)
+        )
 
     async def verify_credentials(
             self,
@@ -61,4 +64,7 @@ class Account:
             'include_email': optional_bool_to_str(include_email)
         }
         url = f'{self._url}/verify_credentials.json'
-        return await self._client.get(url, body)
+        return cast(
+            Mapping[str, Any],
+            await self._client.get(url, body)
+        )

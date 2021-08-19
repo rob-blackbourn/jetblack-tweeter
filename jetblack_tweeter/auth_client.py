@@ -1,6 +1,6 @@
 """An HTTP client which uses oauth1 for authentication"""
 
-from typing import Any, AsyncIterator, List, Mapping, Optional, Union
+from typing import Any, AsyncIterator, Coroutine, List, Mapping, Optional, Union
 from urllib.parse import urlencode
 
 from oauthlib.oauth1 import Client as OAuth1Client
@@ -42,10 +42,10 @@ class AuthenticatedHttpClient(AbstractHttpClient):
         )
 
     def stream(
-            self,
-            url: str,
-            data: Optional[Mapping[str, Any]] = None,
-            method: str = 'post'
+        self,
+        url: str,
+        data: Optional[Mapping[str, Any]] = None,
+        method: str = 'post'
     ) -> AsyncIterator[Union[List[Any], Mapping[str, Any]]]:
         url, headers, body = self._oauth_client.sign(
             url,
@@ -55,7 +55,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             body=urlencode(clean_dict(data)) if data else None,
             http_method=method.upper(),
         )
-        return self._client.stream(
+        return self._client.stream(  # type: ignore
             url,
             method,
             headers,
