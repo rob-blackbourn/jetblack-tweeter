@@ -9,6 +9,7 @@ from ...types import AbstractTweeterSession
 
 
 class AiohttpTweeterSession(AbstractTweeterSession):
+    """A tweeter session using aiohttp."""
 
     def __init__(self) -> None:
         self._client = ClientSession()
@@ -38,9 +39,9 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             url: str,
             headers: Mapping[str, str]
     ) -> Union[List[Any], Mapping[str, Any]]:
-        async with self._client.get(url, headers=headers) as r:
-            r.raise_for_status()
-            return await r.json()
+        async with self._client.get(url, headers=headers) as response:
+            response.raise_for_status()
+            return await response.json()
 
     async def post(
             self,
@@ -49,6 +50,9 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             body: Optional[str]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = body.encode() if body else None
-        async with self._client.post(url, headers=headers, data=data) as r:
-            r.raise_for_status()
-            return await r.json()
+        async with self._client.post(url, headers=headers, data=data) as response:
+            response.raise_for_status()
+            return await response.json()
+
+    async def close(self) -> None:
+        await self._client.close()

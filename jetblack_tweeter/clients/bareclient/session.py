@@ -14,6 +14,7 @@ from .utils import to_lines, make_headers
 
 
 class BareTweeterSession(AbstractTweeterSession):
+    """A tweeter session using BareASGI."""
 
     def __init__(self) -> None:
         self._client = HttpUnboundSession(
@@ -104,3 +105,6 @@ class BareTweeterSession(AbstractTweeterSession):
             response_content = json.loads(body)
 
         return response_content
+
+    async def close(self) -> None:
+        pass

@@ -5,7 +5,6 @@ from enum import Enum
 from typing import (
     Any,
     AsyncIterator,
-    Coroutine,
     List,
     Mapping,
     Optional,
@@ -82,6 +81,11 @@ class AbstractTweeterSession(metaclass=ABCMeta):
                 response (if any).
         """
 
+    @abstractmethod
+    async def close(self) -> None:
+        """Close the connection.
+        """
+
 
 class AbstractHttpClient(metaclass=ABCMeta):
     """The abstract class for HTTP clients.
@@ -140,6 +144,11 @@ class AbstractHttpClient(metaclass=ABCMeta):
         Returns:
             Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
                 response if any
+        """
+
+    @abstractmethod
+    async def close(self) -> None:
+        """Close the connection.
         """
 
 

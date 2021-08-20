@@ -364,7 +364,7 @@ class Statuses:
             *,
             include_entities: Optional[bool] = None,
             trim_user: Optional[bool] = None,
-            map: Optional[bool] = None,
+            map: Optional[bool] = None,  # pylint: disable=redefined-builtin
             include_ext_alt_text: Optional[bool] = None,
             include_card_uri: Optional[bool] = None
     ) -> List[Mapping[str, Any]]:

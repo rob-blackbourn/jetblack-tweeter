@@ -1,6 +1,6 @@
 """An HTTP client which uses oauth1 for authentication"""
 
-from typing import Any, AsyncIterator, Coroutine, List, Mapping, Optional, Union
+from typing import Any, AsyncIterator, List, Mapping, Optional, Union
 from urllib.parse import urlencode
 
 from oauthlib.oauth1 import Client as OAuth1Client
@@ -85,3 +85,6 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             http_method='POST'
         )
         return await self._client.post(url, headers, None)
+
+    async def close(self) -> None:
+        await self._client.close()
