@@ -54,5 +54,7 @@ async def main():
     # result = await tweeter.statuses.update('Test message')
     # print(result)
 
+    await tweeter.close()
+
 if __name__ == '__main__':
     asyncio.run(main())

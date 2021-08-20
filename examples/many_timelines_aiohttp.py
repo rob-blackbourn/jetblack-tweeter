@@ -23,6 +23,9 @@ async def main():
     for name in params:
         timeline = await tweeter.statuses.user_timeline(screen_name=name, include_rts=False)
         print(f"{name}: {len(timeline)}")
+
+    await tweeter.close()
+
     print('done')
 
 if __name__ == '__main__':
