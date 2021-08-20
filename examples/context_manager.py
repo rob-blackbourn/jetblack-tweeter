@@ -1,4 +1,4 @@
-"""An example using bareClient"""
+"""An example using context management"""
 
 import asyncio
 import os

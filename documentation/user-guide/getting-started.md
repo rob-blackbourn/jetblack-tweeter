@@ -53,6 +53,37 @@ async def main():
     result = await tweeter.statuses.update('Hello from jetblack-tweeter')
     print(result)
 
+    # Close the tweeter.
+    await tweeter.close()
+
 if __name__ == '__main__':
     asyncio.run(main())
+```
+
+This example uses `aiohttp` with context management.
+
+```python
+import asyncio
+import os
+
+from jetblack_tweeter import Tweeter
+from jetblack_tweeter.clients.aiohttp import AiohttpTweeterSession
+
+async def main():
+    async with Tweeter(
+        AiohttpTweeterSession(),
+        # required for oauth1 signing:
+        os.environ["APP_KEY"],
+        os.environ["APP_KEY_SECRET"],
+        # optionally necessary for endpoints requiring a user's scope:
+        access_token=os.environ["ACCESS_TOKEN"],
+        access_token_secret=os.environ["ACCESS_TOKEN_SECRET"]
+    ) as tweeter:
+
+        user_timeline = await tweeter.statuses.user_timeline()
+        print(user_timeline)
+
+if __name__ == '__main__':
+    asyncio.run(main())
+
 ```

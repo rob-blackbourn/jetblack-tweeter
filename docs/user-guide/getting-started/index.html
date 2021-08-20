@@ -435,6 +435,34 @@
     <span class="n">result</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tweeter</span><span class="o">.</span><span class="n">statuses</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="s1">&#39;Hello from jetblack-tweeter&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
+    <span class="c1"># Close the tweeter.</span>
+    <span class="k">await</span> <span class="n">tweeter</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
+</code></pre></div>
+
+<p>This example uses <code>aiohttp</code> with context management.</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">from</span> <span class="nn">jetblack_tweeter</span> <span class="kn">import</span> <span class="n">Tweeter</span>
+<span class="kn">from</span> <span class="nn">jetblack_tweeter.clients.aiohttp</span> <span class="kn">import</span> <span class="n">AiohttpTweeterSession</span>
+
+<span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">async</span> <span class="k">with</span> <span class="n">Tweeter</span><span class="p">(</span>
+        <span class="n">AiohttpTweeterSession</span><span class="p">(),</span>
+        <span class="c1"># required for oauth1 signing:</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_KEY&quot;</span><span class="p">],</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_KEY_SECRET&quot;</span><span class="p">],</span>
+        <span class="c1"># optionally necessary for endpoints requiring a user&#39;s scope:</span>
+        <span class="n">access_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ACCESS_TOKEN&quot;</span><span class="p">],</span>
+        <span class="n">access_token_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ACCESS_TOKEN_SECRET&quot;</span><span class="p">]</span>
+    <span class="p">)</span> <span class="k">as</span> <span class="n">tweeter</span><span class="p">:</span>
+
+        <span class="n">user_timeline</span> <span class="o">=</span> <span class="k">await</span> <span class="n">tweeter</span><span class="o">.</span><span class="n">statuses</span><span class="o">.</span><span class="n">user_timeline</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">user_timeline</span><span class="p">)</span>
+
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">asyncio</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">())</span>
 </code></pre></div>
