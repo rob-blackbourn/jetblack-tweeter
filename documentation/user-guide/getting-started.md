@@ -1,5 +1,7 @@
 # Getting Started
 
+## Example
+
 Here is an example:
 
 ```python
@@ -59,6 +61,8 @@ async def main():
 if __name__ == '__main__':
     asyncio.run(main())
 ```
+
+## Context Management
 
 This example uses `aiohttp` with context management.
 
