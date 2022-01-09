@@ -76,10 +76,8 @@ from jetblack_tweeter.clients.aiohttp import AiohttpTweeterSession
 async def main():
     async with Tweeter(
         AiohttpTweeterSession(),
-        # required for oauth1 signing:
         os.environ["APP_KEY"],
         os.environ["APP_KEY_SECRET"],
-        # optionally necessary for endpoints requiring a user's scope:
         access_token=os.environ["ACCESS_TOKEN"],
         access_token_secret=os.environ["ACCESS_TOKEN_SECRET"]
     ) as tweeter:

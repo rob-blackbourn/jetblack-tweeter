@@ -14,7 +14,7 @@ ACCESS_TOKEN_SECRET = os.environ["ACCESS_TOKEN_SECRET"]
 
 async def main():
     tweeter = Tweeter(
-        AiohttpTweeterSession(),
+        AiohttpTweeterSession(ssl=False),
         # required for oauth1 signing:
         APP_KEY,
         APP_KEY_SECRET,
