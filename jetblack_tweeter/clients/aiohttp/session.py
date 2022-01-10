@@ -46,7 +46,11 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             url: str,
             headers: Mapping[str, str]
     ) -> Union[List[Any], Mapping[str, Any]]:
-        async with self._client.get(url, headers=headers) as response:
+        async with self._client.get(
+                url,
+                headers=headers,
+                ssl=self._ssl
+        ) as response:
             response.raise_for_status()
             return await response.json()
 
@@ -57,7 +61,12 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             body: Optional[str]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = body.encode() if body else None
-        async with self._client.post(url, headers=headers, data=data) as response:
+        async with self._client.post(
+                url,
+                headers=headers,
+                data=data,
+                ssl=self._ssl
+        ) as response:
             response.raise_for_status()
             return await response.json()
 
