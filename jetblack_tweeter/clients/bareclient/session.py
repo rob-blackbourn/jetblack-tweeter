@@ -59,7 +59,8 @@ class BareTweeterSession(AbstractTweeterSession):
     async def get(
             self,
             url: str,
-            headers: Mapping[str, str]
+            headers: Mapping[str, str],
+            timeout: Optional[float]
     ) -> Union[List[Any], Mapping[str, Any]]:
         async with self._client.request(
             url,
@@ -78,7 +79,8 @@ class BareTweeterSession(AbstractTweeterSession):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         bare_headers = make_headers(headers)
         buf = body.encode() if body else None

@@ -50,13 +50,15 @@ class AbstractTweeterSession(metaclass=ABCMeta):
     async def get(
             self,
             url: str,
-            headers: Mapping[str, str]
+            headers: Mapping[str, str],
+            timeout: Optional[float]
     ) -> Union[List[Any], Mapping[str, Any]]:
         """Get data from Twitter
 
         Args:
             url (str): The url
             headers (Mapping[str, str]): The HTTP headers.
+            timeout (Optional[float]): An optional timeout.
 
         Returns:
             Union[List[Any], Mapping[str, Any]]: The unpacked JSON response.
@@ -67,14 +69,16 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Post data to Twitter
 
         Args:
             url (str): The url
-            headers (Mapping[str, str]): The HTTP headers
-            body (Optional[str]): The body (if any)
+            headers (Mapping[str, str]): The HTTP headers.
+            body (Optional[str]): The body (if any).
+            timeout (Optional[float]): An optional timeout.
 
         Returns:
             Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
@@ -115,7 +119,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def get(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Union[List[Any], Mapping[str, Any]]:
         """Gets data from Twitter.
 
@@ -123,6 +128,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
             url (str): The url.
             params (Optional[Mapping[str, Any]], optional): The parameters if
                 any. Defaults to None.
+            timeout (Optional[float], optional): The timeout if any. Defaults
+                to None.
 
         Returns:
             Union[List[Any], Mapping[str, Any]]: The unpacked JSON response.
@@ -132,7 +139,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def post(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Post data to Twitter.
 
@@ -140,6 +148,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
             url (str): The url
             params (Optional[Mapping[str, Any]], optional): The parameters if
                 any. Defaults to None.
+            timeout (Optional[float], optional): The timeout if any. Defaults
+                to None.
 
         Returns:
             Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON

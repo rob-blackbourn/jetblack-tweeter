@@ -47,7 +47,8 @@ class Search:
         until: Optional[date] = None,
         since_id: Optional[int] = None,
         max_id: Optional[int] = None,
-        include_entities: Optional[bool] = None
+        include_entities: Optional[bool] = None,
+        timeout: Optional[float] = None
     ) -> List[Mapping[str, Any]]:
         """Returns a collection of relevant Tweets matching a specified query.
 
@@ -95,6 +96,8 @@ class Search:
                 Defaults to None.
             include_entities (Optional[bool], optional): The entities node will
                 not be included when set to false. Defaults to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             List[Mapping[str, Any]]: A list of matching tweets.
@@ -114,5 +117,5 @@ class Search:
         url = f'{self._url}/tweets.json'
         return cast(
             List[Mapping[str, Any]],
-            await self._client.get(url, body)
+            await self._client.get(url, body, timeout)
         )

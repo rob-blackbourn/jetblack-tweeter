@@ -33,7 +33,8 @@ class Statuses:
             max_id: Optional[int] = None,
             trim_user: bool = True,
             exclude_replies: bool = True,
-            include_entities: bool = False
+            include_entities: bool = False,
+            timeout: Optional[float] = None
     ):
         """Returns a collection of the most recent Tweets and Retweets posted by
         the authenticating user and the users they follow. The home timeline is
@@ -66,6 +67,8 @@ class Statuses:
                 replies. Defaults to True.
             include_entities (bool, optional): The entities node will not be
                 included when set to false. Defaults to False.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             Mapping[str, Any]: The user timeline.
@@ -79,7 +82,7 @@ class Statuses:
             'include_entities': bool_to_str(include_entities),
         }
         url = f'{self._url}/home_timeline.json'
-        return await self._client.get(url, body)
+        return await self._client.get(url, body, timeout)
 
     async def user_timeline(
             self,
@@ -91,7 +94,8 @@ class Statuses:
             max_id: Optional[int] = None,
             trim_user: bool = True,
             exclude_replies: bool = True,
-            include_rts: bool = False
+            include_rts: bool = False,
+            timeout: Optional[float] = None
     ):
         """Returns a collection of the most recent Tweets posted by the user
         indicated by the screen_name or user_id parameters.
@@ -134,6 +138,8 @@ class Statuses:
                 by the count parameter). Note: If you're using the trim_user
                 parameter in conjunction with include_rts, the retweets will
                 still contain a full user object. Defaults to False.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             List[Mapping[str, Any]]: The user timeline.
@@ -149,7 +155,7 @@ class Statuses:
             'include_rts': bool_to_str(include_rts),
         }
         url = f'{self._url}/user_timeline.json'
-        return await self._client.get(url, body)
+        return await self._client.get(url, body, timeout)
 
     async def mentions_timeline(
             self,
@@ -158,7 +164,8 @@ class Statuses:
             since_id: Optional[int] = None,
             max_id: Optional[int] = None,
             trim_user: bool = True,
-            include_entities: bool = True
+            include_entities: bool = True,
+            timeout: Optional[float] = None
     ) -> List[Mapping[str, Any]]:
         """Returns the 20 most recent mentions (Tweets containing a users's
         @screen_name) for the authenticating user.
@@ -188,6 +195,8 @@ class Statuses:
                 complete user object. Defaults to True.
             include_entities (bool, optional): The entities node will not be
                 included when set to false. Defaults to True.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             List[Mapping[str, Any]]: The mentions timeline.
@@ -202,7 +211,7 @@ class Statuses:
         url = f'{self._url}/mentions_timeline.json'
         return cast(
             List[Mapping[str, Any]],
-            await self._client.get(url, body)
+            await self._client.get(url, body, timeout)
         )
 
     async def update(
@@ -222,7 +231,8 @@ class Statuses:
             trim_user: Optional[bool] = None,
             enable_dmcommands: Optional[bool] = None,
             fail_dmcommands: Optional[bool] = None,
-            card_uri: Optional[str] = None
+            card_uri: Optional[str] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Mapping[str, Any]]:
         """Updates the authenticating user's current status, also known as
         Tweeting.
@@ -300,6 +310,8 @@ class Statuses:
             card_uri (Optional[str], optional): Associate an ads card with the
                 Tweet using the card_uri value from any ads card response.
                 Defaults to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             Optional[Mapping[str, Any]]: The tweet.
@@ -324,20 +336,19 @@ class Statuses:
         url = f'{self._url}/update.json'
         return cast(
             Optional[Mapping[str, Any]],
-            await self._client.post(url, body)
+            await self._client.post(url, body, timeout)
         )
 
     async def destroy(
             self,
             status_id: int,
             *,
-            trim_user: Optional[bool] = None
+            trim_user: Optional[bool] = None,
+            timeout: Optional[float] = None
     ) -> Mapping[str, Any]:
         """Destroys the status specified by the required ID parameter. The
         authenticating user must be the author of the specified status. Returns
         the destroyed status if successful.
-
-
 
         Args:
             status_id (int): The numerical ID of the desired status.
@@ -345,6 +356,8 @@ class Statuses:
                 returned in a timeline will include a user object including only
                 the status authors numerical ID. Omit this parameter to receive
                 the complete user object. Defaults to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             Mapping[str, Any]: THe deleted tweet.
@@ -355,7 +368,7 @@ class Statuses:
         url = f'{self._url}/destroy/{status_id}.json'
         return cast(
             Mapping[str, Any],
-            await self._client.post(url, body)
+            await self._client.post(url, body, timeout)
         )
 
     async def lookup(
@@ -366,7 +379,8 @@ class Statuses:
             trim_user: Optional[bool] = None,
             map: Optional[bool] = None,  # pylint: disable=redefined-builtin
             include_ext_alt_text: Optional[bool] = None,
-            include_card_uri: Optional[bool] = None
+            include_card_uri: Optional[bool] = None,
+            timeout: Optional[float] = None
     ) -> List[Mapping[str, Any]]:
         """Returns fully-hydrated Tweet objects for up to 100 Tweets per
         request, as specified by comma-separated values passed to the ids
@@ -395,6 +409,8 @@ class Statuses:
                 Tweet returned will include a card_uri attribute when there is
                 an ads card attached to the Tweet and when that card was
                 attached using the card_uri value. Defaults to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             List[Mapping[str, Any]]: A list of tweets.
@@ -410,7 +426,7 @@ class Statuses:
         url = f'{self._url}/lookup.json'
         return cast(
             List[Mapping[str, Any]],
-            await self._client.get(url, body)
+            await self._client.get(url, body, timeout)
         )
 
     async def show(
@@ -421,7 +437,8 @@ class Statuses:
             include_my_retweet: Optional[bool] = None,
             include_entities: Optional[bool] = None,
             include_ext_alt_text: Optional[bool] = None,
-            include_card_uri: Optional[bool] = None
+            include_card_uri: Optional[bool] = None,
+            timeout: Optional[float] = None
     ) -> Mapping[str, Any]:
         """Returns a single Tweet, specified by the id parameter. The Tweet's
         author will also be embedded within the Tweet.
@@ -448,6 +465,8 @@ class Statuses:
                 retrieved Tweet will include a card_uri attribute when there is
                 an ads card attached to the Tweet and when that card was
                 attached using the card_uri value. Defaults to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             Mapping[str, Any]: The tweet.
@@ -463,7 +482,7 @@ class Statuses:
         url = f'{self._url}/show.json'
         return cast(
             Mapping[str, Any],
-            await self._client.get(url, body)
+            await self._client.get(url, body, timeout)
         )
 
     async def oembed(
@@ -480,7 +499,8 @@ class Statuses:
             theme: Optional[Theme] = None,
             link_color: Optional[str] = None,
             widget_type: Optional[WidgetType] = None,
-            dnt: Optional[bool] = None
+            dnt: Optional[bool] = None,
+            timeout: Optional[float] = None
     ) -> Mapping[str, Any]:
         """Returns a single Tweet, specified by either a Tweet web URL or the
         Tweet ID, in an oEmbed-compatible format.
@@ -532,6 +552,8 @@ class Statuses:
                 embedded page on your site are not used for purposes that
                 include personalized suggestions and personalized ads. Defaults
                 to None.
+            timeout (Optional[float], optional): If specified the timeout for
+                the request. Defaults to None.
 
         Returns:
             Mapping[str, Any]: A single tweet.
@@ -553,5 +575,5 @@ class Statuses:
         url = f'{self._url}/oembed.json'
         return cast(
             Mapping[str, Any],
-            await self._client.get(url, body)
+            await self._client.get(url, body, timeout)
         )
