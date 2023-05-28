@@ -67,7 +67,16 @@ UserFields = Literal[
     "verified",
     "verified_type",
     "withheld"
-
+]
+PlaceFields = Literal[
+    "contained_within",
+    "country",
+    "country_code",
+    "full_name",
+    "geo",
+    "id",
+    "name",
+    "place_type"
 ]
 
 
@@ -87,7 +96,6 @@ class Users:
             self,
             id: str,  # pylint: disable=invalid-name,redefined-builtin
             *,
-            max_requests: Optional[int] = None,
             expansions: Optional[Sequence[Literal[
                 "attachments.poll_ids",
                 "attachments.media_keys",
@@ -99,22 +107,57 @@ class Users:
                 "referenced_tweets.id",
                 "referenced_tweets.id.author_id"
             ]]] = None,
+            max_requests: Optional[int] = None,
             media_fields: Optional[Sequence[MediaFields]] = None,
             pagination_token: Optional[str] = None,
-            place_fields: Optional[Sequence[Literal[
-                "contained_within",
-                "country",
-                "country_code",
-                "full_name",
-                "geo",
-                "id",
-                "name",
-                "place_type"
-            ]]] = None,
+            place_fields: Optional[Sequence[PlaceFields]] = None,
             poll_fields: Optional[Sequence[PollFields]] = None,
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Gets information about liked tweets.
+
+        Args:
+            id (str): User ID of the user to request liked Tweets for.
+            expansions (Optional[Sequence[Literal[
+                &quot;attachments.poll_ids&quot;,
+                &quot;attachments.media_keys&quot;,
+                &quot;author_id&quot;,
+                &quot;edit_history_tweet_ids&quot;,
+                &quot;entities.mentions.username&quot;,
+                &quot;geo.place_id&quot;,
+                &quot;in_reply_to_user_id&quot;,
+                &quot;referenced_tweets.id&quot;,
+                &quot;referenced_tweets.id.author_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned Tweets. Defaults
+                to None.
+            max_requests (Optional[int], optional): The maximum number of
+                results to be returned per page. Defaults to None.
+            media_fields (Optional[Sequence[MediaFields]], optional): This
+                fields parameter enables you to select which specific media
+                fields will deliver in each returned Tweet. Defaults to None.
+            pagination_token (Optional[str], optional): Used to request the next
+                page of results if all results weren't returned with the latest
+                request, or to go back to the previous page of results. Defaults
+                to None.
+            place_fields (Optional[Sequence[PlaceFields]], optional): This
+                fields parameter enables you to select which specific place
+                fields will deliver in each returned Tweet. Defaults to None.
+            poll_fields (Optional[Sequence[PollFields]], optional): This fields
+                parameter enables you to select which specific poll fields will
+                deliver in each returned Tweet. Defaults to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: The tweet likes.
+        """
         body = {
             'max_requests': max_requests,
             'expansions': optional_str_list_to_str(expansions),
@@ -138,6 +181,26 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Lookup users by their ids.
+
+        Args:
+            ids (Sequence[str]): The ids for the users.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: Information on the users.
+        """
         body = {
             'ids': str_list_to_str(ids),
             'expansions': optional_str_list_to_str(expansions),
@@ -156,6 +219,26 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Lookup a user by their id.
+
+        Args:
+            id (str): The id of the user.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: Information about the user.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'tweet.fields': optional_str_list_to_str(tweet_fields),
@@ -174,6 +257,26 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Lookup users by their usernames.
+
+        Args:
+            usernames (Sequence[str]): The usernames.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: Information about the users.
+        """
         body = {
             'usernames': str_list_to_str(usernames),
             'expansions': optional_str_list_to_str(expansions),
@@ -193,6 +296,26 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Lookup a user by their username.
+
+        Args:
+            username (str): The username.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: Information about the user.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'tweet.fields': optional_str_list_to_str(tweet_fields),
@@ -210,6 +333,25 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Lookup information about the authenticated user.
+
+        Args:
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: The user information.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'tweet.fields': optional_str_list_to_str(tweet_fields),
@@ -230,6 +372,32 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Returns a list of users the specified user ID is following.
+
+        Args:
+            id (str): The user ID whose following you would like to retrieve.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            max_requests (Optional[int], optional): The maximum number of
+                results to be returned per page. Defaults to None.
+            pagination_token (Optional[str], optional): Used to request the next
+                page of results if all results weren't returned with the latest
+                request, or to go back to the previous page of results. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: A list of users the specified user ID is following.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'max_result': max_results,
@@ -252,6 +420,32 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Returns a list of users who are followers of the specified user ID.
+
+        Args:
+            id (str): The user ID whose followers you would like to retrieve.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            max_requests (Optional[int], optional): The maximum number of
+                results to be returned per page. Defaults to None.
+            pagination_token (Optional[str], optional): Used to request the next
+                page of results if all results weren't returned with the latest
+                request, or to go back to the previous page of results. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: _description_
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'max_result': max_results,
@@ -267,6 +461,17 @@ class Users:
             id: str,  # pylint: disable=invalid-name,redefined-builtin
             target_user_id: str
     ) -> Any:
+        """Allows a user ID to follow another user.
+
+        Args:
+            id (str): The authenticated user ID who you would like to initiate
+                the follow on behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the id to follow.
+
+        Returns:
+            Any: The status of the request.
+        """
         body = {
             'target_user_id': target_user_id,
         }
@@ -278,6 +483,17 @@ class Users:
             source_user_id: str,
             target_user_id: str
     ) -> Any:
+        """Allows a user ID to unfollow another user.
+
+        Args:
+            source_user_id (str): The user ID who you would like to initiate the
+                unfollow on behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the source_user_id to unfollow.
+
+        Returns:
+            Any: The status of the request.
+        """
         url = f'{self._url}/{source_user_id}/following/{target_user_id}'
         return await self._client.delete(url, None)
 
@@ -293,6 +509,32 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Returns a list of users who are blocked by the specified user ID.
+
+        Args:
+            id (str): The user ID whose blocked users you would like to retrieve.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            max_requests (Optional[int], optional): The maximum number of
+                results to be returned per page. Defaults to None.
+            pagination_token (Optional[str], optional): Used to request the next
+                page of results if all results weren't returned with the latest
+                request, or to go back to the previous page of results. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: A list of users.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'max_result': max_results,
@@ -308,6 +550,17 @@ class Users:
             id: str,  # pylint: disable=invalid-name,redefined-builtin
             target_user_id: str
     ) -> Any:
+        """Block a user.
+
+        Args:
+            id (str): 	The user ID who you would like to initiate the block on
+                behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the id to block.
+
+        Returns:
+            Any: The status of the request.
+        """
         body = {
             'target_user_id': target_user_id,
         }
@@ -319,6 +572,17 @@ class Users:
             source_user_id: str,
             target_user_id: str
     ) -> Any:
+        """Unblock a user.
+
+        Args:
+            source_user_id (str): The user ID who you would like to initiate an
+                unblock on behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the source_user_id to unblock.
+
+        Returns:
+            Any: The status of the request.
+        """
         url = f'{self._url}/{source_user_id}/blocking/{target_user_id}'
         return await self._client.delete(url, None)
 
@@ -334,6 +598,32 @@ class Users:
             tweet_fields: Optional[Sequence[TweetFields]] = None,
             user_fields: Optional[Sequence[UserFields]] = None
     ) -> Any:
+        """Returns a list of users who are muted by the specified user ID.
+
+        Args:
+            id (str): The user ID whose muted users you would like to retrieve.
+            expansions (Optional[Sequence[Literal[
+                &quot;pinned_tweet_id&quot;
+                ]]], optional): Expansions enable you to request additional data
+                objects that relate to the originally returned users. Defaults
+                to None.
+            max_requests (Optional[int], optional): The maximum number of
+                results to be returned per page. Defaults to None.
+            pagination_token (Optional[str], optional): Used to request the next
+                page of results if all results weren't returned with the latest
+                request, or to go back to the previous page of results. Defaults
+                to None.
+            tweet_fields (Optional[Sequence[TweetFields]], optional): This
+                fields parameter enables you to select which specific Tweet
+                fields will deliver in each returned Tweet object. Defaults to
+                None.
+            user_fields (Optional[Sequence[UserFields]], optional): This fields
+                parameter enables you to select which specific user fields will
+                deliver in each returned Tweet. Defaults to None.
+
+        Returns:
+            Any: A list of users.
+        """
         body = {
             'expansions': optional_str_list_to_str(expansions),
             'max_result': max_results,
@@ -349,6 +639,17 @@ class Users:
             id: str,  # pylint: disable=invalid-name,redefined-builtin
             target_user_id: str
     ) -> Any:
+        """Mute a user.
+
+        Args:
+            id (str): 	The user ID who you would like to initiate the mute on
+                behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the id to mute.
+
+        Returns:
+            Any: The status of the request.
+        """
         body = {
             'target_user_id': target_user_id,
         }
@@ -360,5 +661,16 @@ class Users:
             source_user_id: str,
             target_user_id: str
     ) -> Any:
+        """Unmute a user.
+
+        Args:
+            source_user_id (str): The user ID who you would like to initiate an
+                unmute on behalf of.
+            target_user_id (str): The user ID of the user that you would like
+                the source_user_id to unmute.
+
+        Returns:
+            Any: The status of the request.
+        """
         url = f'{self._url}/{source_user_id}/blocking/{target_user_id}'
         return await self._client.delete(url, None)

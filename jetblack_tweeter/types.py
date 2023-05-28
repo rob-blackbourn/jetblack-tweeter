@@ -170,13 +170,13 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def post(
             self,
             url: str,
-            body: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Post data to Twitter.
 
         Args:
             url (str): The url
-            body (Optional[Mapping[str, Any]], optional): The body if
+            params (Optional[Mapping[str, Any]], optional): The params if
                 any. Defaults to None.
 
         Returns:
@@ -188,13 +188,13 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def put(
             self,
             url: str,
-            body: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Put data to Twitter.
 
         Args:
             url (str): The url
-            params (Optional[Mapping[str, Any]], optional): The body if
+            params (Optional[Mapping[str, Any]], optional): The params if
                 any. Defaults to None.
 
         Returns:
@@ -206,13 +206,13 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def delete(
             self,
             url: str,
-            body: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Delete data from Twitter.
 
         Args:
             url (str): The url
-            params (Optional[Mapping[str, Any]], optional): The body if
+            params (Optional[Mapping[str, Any]], optional): The params if
                 any. Defaults to None.
 
         Returns:

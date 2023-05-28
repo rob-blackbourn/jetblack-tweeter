@@ -41,6 +41,7 @@ class Tweeter:
             search (Search): Access to the search end point.
             statuses (Statuses): Access to the statuses end point.
             stream (Stream): Access to the stream end point.
+            users (Statuses): Access to the users end point.
         """
         self._client = AuthenticatedHttpClient(
             session,
