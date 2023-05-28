@@ -90,7 +90,8 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Put data to Twitter
 
@@ -98,6 +99,7 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             url (str): The url
             headers (Mapping[str, str]): The HTTP headers
             body (Optional[str]): The body (if any)
+            timeout (Optional[float]): An optional timeout.
 
         Returns:
             Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
@@ -109,14 +111,16 @@ class AbstractTweeterSession(metaclass=ABCMeta):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Delete data in Twitter
 
         Args:
             url (str): The url
             headers (Mapping[str, str]): The HTTP headers
-            body (Optional[str]): The body (if any)
+            body (Optional[str]): The body (if any),
+            timeout (Optional[float]): An optional timeout.
 
         Returns:
             Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
@@ -196,7 +200,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def put(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Put data to Twitter.
 
@@ -214,7 +219,8 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def delete(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Delete data from Twitter.
 

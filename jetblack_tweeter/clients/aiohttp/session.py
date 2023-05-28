@@ -9,11 +9,13 @@ from aiohttp import ClientSession, Fingerprint, ClientTimeout
 from ...errors import ApiError
 from ...types import AbstractTweeterSession
 
+
 def _make_timeout(timeout: Optional[float]) -> Optional[ClientTimeout]:
     if timeout is None:
         return None
     else:
         return ClientTimeout(total=timeout)
+
 
 class AiohttpTweeterSession(AbstractTweeterSession):
     """A tweeter session using aiohttp."""
@@ -87,14 +89,17 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        client_timeout = _make_timeout(timeout)
         data = body.encode() if body else None
         async with self._client.put(
                 url,
                 headers=headers,
                 data=data,
-                ssl=self._ssl
+                ssl=self._ssl,
+                timeout=client_timeout
         ) as response:
             response.raise_for_status()
             return await response.json()
@@ -103,14 +108,17 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             self,
             url: str,
             headers: Mapping[str, str],
-            body: Optional[str]
+            body: Optional[str],
+            timeout: Optional[float]
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        client_timeout = _make_timeout(timeout)
         data = body.encode() if body else None
         async with self._client.delete(
                 url,
                 headers=headers,
                 data=data,
-                ssl=self._ssl
+                ssl=self._ssl,
+                timeout=client_timeout
         ) as response:
             response.raise_for_status()
             return await response.json()
