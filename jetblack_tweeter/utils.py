@@ -1,5 +1,6 @@
 """Utilities"""
 
+from datetime import datetime, timezone
 from typing import Any, Mapping, Optional, Sequence
 
 from .types import BoundingBox, Location
@@ -88,3 +89,15 @@ def optional_bounding_box_list_to_str(
         default: Optional[str] = None
 ) -> Optional[str]:
     return bounding_box_list_to_str(value) if value is not None else default
+
+
+def datetime_to_str(value: datetime) -> str:
+    value = value.astimezone(timezone.utc).replace(tzinfo=None)
+    return value.strftime('%Y-%m-%dT%H:%M:%SZ')
+
+
+def optional_datetime_to_str(
+        value: Optional[datetime],
+        default: Optional[str] = None
+) -> Optional[str]:
+    return datetime_to_str(value) if value is not None else default

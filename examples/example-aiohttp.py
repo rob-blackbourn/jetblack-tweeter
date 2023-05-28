@@ -1,6 +1,7 @@
 """An example using bareClient"""
 
 import asyncio
+from datetime import datetime
 import os
 
 from jetblack_tweeter import Tweeter
@@ -24,6 +25,7 @@ async def main():
     )
 
     me = await tweeter.users.me()
+    timeline = await tweeter.users.timeline(me['data']['id'])
     rob = await tweeter.users.lookup_by_username('robblackbourn')
     following = await tweeter.users.following(me['data']['id'])
     followers = await tweeter.users.followers(me['data']['id'])
