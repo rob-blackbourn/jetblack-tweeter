@@ -6,6 +6,7 @@ from typing import (
     Any,
     AsyncIterator,
     List,
+    Literal,
     Mapping,
     Optional,
     TypedDict,
@@ -323,3 +324,77 @@ class TweetObject(TypedDict, total=False):
     in_reply_to_screen_name: Optional[str]
     user: UserObject
     coordinates: CoordinatesObject
+
+
+MediaFields = Literal[
+    "duration_ms",
+    "height",
+    'media_key',
+    "preview_image_url",
+    "type",
+    "url",
+    "width",
+    "public_metrics",
+    "non_public_metrics",
+    "organic_metrics",
+    "promoted_metrics",
+    "alt_text",
+    "variants"
+]
+PollFields = Literal[
+    "duration_minutes",
+    "end_datetime",
+    "id",
+    "options",
+    "voting_status"
+]
+TweetFields = Literal[
+    "attachments",
+    "author_id",
+    "context_annotations",
+    "conversation_id",
+    "created_at",
+    "edit_controls",
+    "entities",
+    "geo",
+    "id",
+    "in_reply_to_user_id",
+    "lang",
+    "non_public_metrics",
+    "public_metrics",
+    "organic_metrics",
+    "promoted_metrics",
+    "possibly_sensitive",
+    "referenced_tweets",
+    "reply_settings",
+    "source",
+    "text",
+    "withheld"
+]
+UserFields = Literal[
+    "created_at",
+    "description",
+    "entities",
+    "id",
+    "location",
+    "name",
+    "pinned_tweet_id",
+    "profile_image_url",
+    "protected",
+    "public_metrics",
+    "url",
+    "username",
+    "verified",
+    "verified_type",
+    "withheld"
+]
+PlaceFields = Literal[
+    "contained_within",
+    "country",
+    "country_code",
+    "full_name",
+    "geo",
+    "id",
+    "name",
+    "place_type"
+]
