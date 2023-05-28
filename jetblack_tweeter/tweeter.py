@@ -6,7 +6,7 @@ from types import TracebackType
 from typing import Optional, Type, TypeVar
 
 from .auth_client import AuthenticatedHttpClient
-from .api import Account, Search, Stream, Statuses
+from .api import Account, Search, Stream, Statuses, Users
 from .types import AbstractTweeterSession
 
 TException = TypeVar('TException', bound=BaseException)
@@ -53,6 +53,7 @@ class Tweeter:
         self.search = Search(self._client)
         self.statuses = Statuses(self._client)
         self.stream = Stream(self._client)
+        self.users = Users(self._client)
 
     async def __aenter__(self) -> Tweeter:
         return self

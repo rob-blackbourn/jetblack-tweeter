@@ -23,8 +23,11 @@ async def main():
         access_token_secret=ACCESS_TOKEN_SECRET
     )
 
-    # user_timeline = await tweeter.statuses.user_timeline()
-    # print(user_timeline)
+    user_timeline = await tweeter.statuses.user_timeline()
+    print(user_timeline)
+
+    # account_verify_credentials = await tweeter.account.verify_credentials()
+    # print(account_verify_credentials)
 
     # lookup_tweets = await tweeter.statuses.lookup(ids=[1313175713030209536])
     # print(lookup_tweets)
@@ -34,9 +37,6 @@ async def main():
 
     # account_settings = await tweeter.account.settings()
     # print(account_settings)
-
-    account_verify_credentials = await tweeter.account.verify_credentials()
-    print(account_verify_credentials)
 
     # # watch the random sampling of tweets chosen by twitter
     # async for tweet in tweeter.stream.sample():

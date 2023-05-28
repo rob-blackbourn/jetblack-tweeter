@@ -1,5 +1,6 @@
 """An HTTP client which uses oauth1 for authentication"""
 
+import json
 from typing import Any, AsyncIterator, List, Mapping, Optional, Union
 from urllib.parse import urlencode
 
@@ -80,11 +81,38 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             params: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = clean_optional_dict(params)
+        body = None if data is None else json.dumps(data)
         url, headers, _ = self._oauth_client.sign(
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='POST'
         )
-        return await self._client.post(url, headers, None)
+        return await self._client.post(url, headers, body)
+
+    async def put(
+            self,
+            url: str,
+            params: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        data = clean_optional_dict(params)
+        body = None if data is None else json.dumps(data)
+        url, headers, _ = self._oauth_client.sign(
+            url + (f'?{urlencode(data)}' if data else ''),
+            http_method='PUT'
+        )
+        return await self._client.put(url, headers, body)
+
+    async def delete(
+            self,
+            url: str,
+            params: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        data = clean_optional_dict(params)
+        body = None if data is None else json.dumps(data)
+        url, headers, _ = self._oauth_client.sign(
+            url + (f'?{urlencode(data)}' if data else ''),
+            http_method='DELETE'
+        )
+        return await self._client.delete(url, headers, body)
 
     async def close(self) -> None:
         await self._client.close()

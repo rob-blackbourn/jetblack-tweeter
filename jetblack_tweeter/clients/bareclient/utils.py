@@ -2,7 +2,7 @@
 
 from typing import List, Mapping, Tuple
 
-from baretypes import Header
+Header = Tuple[bytes, bytes]
 
 
 def to_lines(buf) -> Tuple[List[bytes], bytes]:

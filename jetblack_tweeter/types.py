@@ -82,6 +82,44 @@ class AbstractTweeterSession(metaclass=ABCMeta):
         """
 
     @abstractmethod
+    async def put(
+            self,
+            url: str,
+            headers: Mapping[str, str],
+            body: Optional[str]
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        """Put data to Twitter
+
+        Args:
+            url (str): The url
+            headers (Mapping[str, str]): The HTTP headers
+            body (Optional[str]): The body (if any)
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response (if any).
+        """
+
+    @abstractmethod
+    async def delete(
+            self,
+            url: str,
+            headers: Mapping[str, str],
+            body: Optional[str]
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        """Delete data in Twitter
+
+        Args:
+            url (str): The url
+            headers (Mapping[str, str]): The HTTP headers
+            body (Optional[str]): The body (if any)
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response (if any).
+        """
+
+    @abstractmethod
     async def close(self) -> None:
         """Close the connection.
         """
@@ -132,13 +170,49 @@ class AbstractHttpClient(metaclass=ABCMeta):
     async def post(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            body: Optional[Mapping[str, Any]] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         """Post data to Twitter.
 
         Args:
             url (str): The url
-            params (Optional[Mapping[str, Any]], optional): The parameters if
+            body (Optional[Mapping[str, Any]], optional): The body if
+                any. Defaults to None.
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response if any
+        """
+
+    @ abstractmethod
+    async def put(
+            self,
+            url: str,
+            body: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        """Put data to Twitter.
+
+        Args:
+            url (str): The url
+            params (Optional[Mapping[str, Any]], optional): The body if
+                any. Defaults to None.
+
+        Returns:
+            Optional[Union[List[Any], Mapping[str, Any]]]: The unpacked JSON
+                response if any
+        """
+
+    @ abstractmethod
+    async def delete(
+            self,
+            url: str,
+            body: Optional[Mapping[str, Any]] = None
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        """Delete data from Twitter.
+
+        Args:
+            url (str): The url
+            params (Optional[Mapping[str, Any]], optional): The body if
                 any. Defaults to None.
 
         Returns:

@@ -70,5 +70,37 @@ class AiohttpTweeterSession(AbstractTweeterSession):
             response.raise_for_status()
             return await response.json()
 
+    async def put(
+            self,
+            url: str,
+            headers: Mapping[str, str],
+            body: Optional[str]
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        data = body.encode() if body else None
+        async with self._client.put(
+                url,
+                headers=headers,
+                data=data,
+                ssl=self._ssl
+        ) as response:
+            response.raise_for_status()
+            return await response.json()
+
+    async def delete(
+            self,
+            url: str,
+            headers: Mapping[str, str],
+            body: Optional[str]
+    ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
+        data = body.encode() if body else None
+        async with self._client.delete(
+                url,
+                headers=headers,
+                data=data,
+                ssl=self._ssl
+        ) as response:
+            response.raise_for_status()
+            return await response.json()
+
     async def close(self) -> None:
         await self._client.close()

@@ -23,8 +23,35 @@ async def main():
         access_token_secret=ACCESS_TOKEN_SECRET
     )
 
-    # user_timeline = await tweeter.statuses.user_timeline()
-    # print(user_timeline)
+    me = await tweeter.users.me()
+    rob = await tweeter.users.lookup_by_username('robblackbourn')
+    following = await tweeter.users.following(me['data']['id'])
+    followers = await tweeter.users.followers(me['data']['id'])
+
+    rob2 = await tweeter.users.lookup_by_username('robblackbourn2')
+    rob1 = await tweeter.users.lookup_by_username('robblackbourn1')
+    rob = await tweeter.users.lookup_by_username('robblackbourn')
+
+    liked_tweets = await tweeter.users.liked_tweets('44196397')
+
+    user_timeline = await tweeter.statuses.user_timeline(screen_name='cali_student')
+    # user_timeline = await tweeter.statuses.user_timeline(
+    #     screen_name='cali_student',
+    #     user_id = '1137278362',
+    #     include_rts=False
+    # )
+    user_timeline = await tweeter.statuses.user_timeline(screen_name="robblackbourn1")
+    user_timeline = await tweeter.statuses.user_timeline(screen_name="elonmusk")
+    user_timeline = await tweeter.statuses.user_timeline(
+        user_id='44196397'
+    )
+
+    user_timeline = await tweeter.statuses.user_timeline(
+        user_id='44196397'
+    )
+
+    user_timeline = await tweeter.statuses.user_timeline()
+    print(user_timeline)
 
     # lookup_tweets = await tweeter.statuses.lookup(ids=[1313175713030209536])
     # print(lookup_tweets)
@@ -42,15 +69,15 @@ async def main():
     # async for tweet in tweeter.stream.sample():
     #     print(tweet)
 
-    async for tweet in tweeter.stream.filter(
-            track=['#python'],
-            locations=[
-                ((-122.75, 36.8), (-121.75, 37.8)),
-                ((-74, 40), (-73, 41))
-            ],
+    # async for tweet in tweeter.stream.filter(
+    #         track=['#python'],
+    #         locations=[
+    #             ((-122.75, 36.8), (-121.75, 37.8)),
+    #             ((-74, 40), (-73, 41))
+    #         ],
 
-    ):
-        print(tweet['text'])
+    # ):
+    #     print(tweet['text'])
 
     # result = await tweeter.statuses.update('Test message')
     # print(result)

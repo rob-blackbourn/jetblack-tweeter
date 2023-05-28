@@ -1,22 +1,22 @@
 """Utilities"""
 
-from typing import Any, List, Mapping, Optional
+from typing import Any, Mapping, Optional, Sequence
 
 from .types import BoundingBox, Location
 
 
-def str_list_to_str(values: List[str]) -> str:
+def str_list_to_str(values: Sequence[str]) -> str:
     return ','.join(values)
 
 
 def optional_str_list_to_str(
-        values: Optional[List[str]],
+        values: Optional[Sequence[str]],
         default: Optional[str] = None
 ) -> Optional[str]:
     return str_list_to_str(values) if values else default
 
 
-def int_list_to_str(values: List[int]) -> str:
+def int_list_to_str(values: Sequence[int]) -> str:
     return ','.join(
         str(value)
         for value in values
@@ -24,7 +24,7 @@ def int_list_to_str(values: List[int]) -> str:
 
 
 def optional_int_list_to_str(
-        values: Optional[List[int]],
+        values: Optional[Sequence[int]],
         default: Optional[str] = None
 ) -> Optional[str]:
     return int_list_to_str(values) if values else default
@@ -79,12 +79,12 @@ def optional_bounding_box_to_str(
     return bounding_box_to_str(value) if value is not None else default
 
 
-def bounding_box_list_to_str(value: List[BoundingBox]) -> str:
+def bounding_box_list_to_str(value: Sequence[BoundingBox]) -> str:
     return ",".join(bounding_box_to_str(x) for x in value)
 
 
 def optional_bounding_box_list_to_str(
-        value: Optional[List[BoundingBox]],
+        value: Optional[Sequence[BoundingBox]],
         default: Optional[str] = None
 ) -> Optional[str]:
     return bounding_box_list_to_str(value) if value is not None else default
