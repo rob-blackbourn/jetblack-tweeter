@@ -66,19 +66,21 @@ class AuthenticatedHttpClient(AbstractHttpClient):
     async def get(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Union[List[Any], Mapping[str, Any]]:
         data = clean_optional_dict(params)
         url, headers, _ = self._oauth_client.sign(
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='GET',
         )
-        return await self._client.get(url, headers)
+        return await self._client.get(url, headers, timeout)
 
     async def post(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = clean_optional_dict(params)
         body = None if data is None else json.dumps(data)
@@ -86,12 +88,13 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='POST'
         )
-        return await self._client.post(url, headers, body)
+        return await self._client.post(url, headers, body, timeout)
 
     async def put(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = clean_optional_dict(params)
         body = None if data is None else json.dumps(data)
@@ -99,12 +102,13 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='PUT'
         )
-        return await self._client.put(url, headers, body)
+        return await self._client.put(url, headers, body, timeout)
 
     async def delete(
             self,
             url: str,
-            params: Optional[Mapping[str, Any]] = None
+            params: Optional[Mapping[str, Any]] = None,
+            timeout: Optional[float] = None
     ) -> Optional[Union[List[Any], Mapping[str, Any]]]:
         data = clean_optional_dict(params)
         body = None if data is None else json.dumps(data)
@@ -112,7 +116,7 @@ class AuthenticatedHttpClient(AbstractHttpClient):
             url + (f'?{urlencode(data)}' if data else ''),
             http_method='DELETE'
         )
-        return await self._client.delete(url, headers, body)
+        return await self._client.delete(url, headers, body, timeout)
 
     async def close(self) -> None:
         await self._client.close()

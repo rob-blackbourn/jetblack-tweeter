@@ -513,10 +513,8 @@
 <span class="k">async</span> <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
     <span class="k">async</span> <span class="k">with</span> <span class="n">Tweeter</span><span class="p">(</span>
         <span class="n">AiohttpTweeterSession</span><span class="p">(),</span>
-        <span class="c1"># required for oauth1 signing:</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_KEY&quot;</span><span class="p">],</span>
         <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;APP_KEY_SECRET&quot;</span><span class="p">],</span>
-        <span class="c1"># optionally necessary for endpoints requiring a user&#39;s scope:</span>
         <span class="n">access_token</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ACCESS_TOKEN&quot;</span><span class="p">],</span>
         <span class="n">access_token_secret</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">&quot;ACCESS_TOKEN_SECRET&quot;</span><span class="p">]</span>
     <span class="p">)</span> <span class="k">as</span> <span class="n">tweeter</span><span class="p">:</span>
