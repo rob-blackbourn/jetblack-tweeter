@@ -96,7 +96,7 @@ class Statuses:
             exclude_replies: bool = True,
             include_rts: bool = False,
             timeout: Optional[float] = None
-    ):
+    ) -> Any:
         """Returns a collection of the most recent Tweets posted by the user
         indicated by the screen_name or user_id parameters.
 
